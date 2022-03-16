@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:25:12 by amann             #+#    #+#             */
-/*   Updated: 2022/03/15 19:13:22 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:14:05 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ int	main(int ac, char **av)
 	struct dirent	*next_filename;	
 	char			*name;
 
-	printf("hello world\n");
-	if (ac != 2)
+	if (ac > 2)
 	{
 		printf("please provide the name of one directory\n");
 		return (1);
 	}
-	directory = opendir(av[1]);
-   	if (!directory)
+	if (ac == 2)
+		directory = opendir(av[1]);
+	else
+		directory = opendir("./");
+	if (!directory)
 	{
 		printf("not a valid directory\n");
 		return (1);
@@ -47,9 +49,10 @@ int	main(int ac, char **av)
 	{
 		name = next_filename->d_name;
 		if (name[0] != '.')
-			printf("%s\n", name);
+			printf("%s\t", name);
 		next_filename = readdir(directory);
 	}
+	printf("\n");
 	closedir(directory);
 	return (0);
 }
