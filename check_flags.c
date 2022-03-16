@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   check_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 18:39:01 by amann             #+#    #+#             */
-/*   Updated: 2022/03/16 20:20:06 by amann            ###   ########.fr       */
+/*   Created: 2022/03/16 20:10:47 by amann             #+#    #+#             */
+/*   Updated: 2022/03/16 20:24:35 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-int	main(int argc, char **argv)
+void	check_flags(char **argv)
 {
-	t_ls	*flags;
-	
-	if (argc == 1)
+	int i = 0;
+	while (argv[i])
 	{
-		basic_display(FALSE);
-		return (0);
+		ft_printf(argv[i]);
+		ft_putchar('\n');
+		i++;
 	}
-	flags = NULL;
-	initialise_flags(&flags);
-	if (!flags)
-		return (1);
-	ft_putendl("here now");
-	check_flags(argv + 1);
-	return (0);
+}
+
+void	initialise_flags(t_ls **flags)
+{
+	*flags = (t_ls *) malloc(sizeof(t_ls));
+	if (!(*flags))
+		return ;
+	(*flags)->list = FALSE;
+	(*flags)->recursive = FALSE;
+	(*flags)->reverse = FALSE;
+	(*flags)->all = FALSE;
+	(*flags)->time = FALSE;
 }

@@ -6,14 +6,14 @@
 #    By: amann <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 17:55:31 by amann             #+#    #+#              #
-#    Updated: 2022/03/16 18:57:21 by amann            ###   ########.fr        #
+#    Updated: 2022/03/16 20:24:01 by amann            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #variables
 NAME = ft_ls
 FLAGS = -Wall -Werror -Wextra -ansi -pedantic -std=c99 -O3
-SRCS = ft_ls.c
+SRCS = ft_ls.c check_flags.c basic_display.c
 HEADER = -I includes/ft_ls.h
 OBJ = $(SRCS:.c=.o)
 LIB_DIR = libft/
