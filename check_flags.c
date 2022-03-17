@@ -6,21 +6,59 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:10:47 by amann             #+#    #+#             */
-/*   Updated: 2022/03/16 20:24:35 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/17 14:25:10 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void	check_flags(char **argv)
+/* 
+ * Flags parsed after a directory name are ignored 
+ * error message displayed if dir name not recognised
+ * usage displayed if invalid flag parsed
+*/
+
+static int	flag_control(char *s, t_ls **flags)
 {
-	int i = 0;
-	while (argv[i])
+	s++;
+//	ft_printf("%c\n", *s);
+	if (*s == '\0')
+		return (0);
+	if (!ft_strchr(FLAGS, *s))
+		return (1);
+	if (*s == 'l')
+		(*flags)->list = TRUE;
+	else if (*s == 'R')
+		(*flags)->recursive = TRUE;
+	else if (*s == 'r')
+		(*flags)->reverse = TRUE;
+	else if (*s == 'a')
+		(*flags)->all = TRUE;
+	else if (*s == 't')
+		(*flags)->time = TRUE;
+	return (flag_control(s, flags));
+}
+
+int		option_control(char ***argv, t_ls **flags)
+{
+	(*argv)++;
+	while (**argv)
 	{
-		ft_printf(argv[i]);
-		ft_putchar('\n');
-		i++;
+		if ((**argv)[0] == '-')
+		{
+			if ((**argv)[1] == '\0')
+				break ;
+			if (flag_control(**argv, flags))
+			{	
+				ft_printf("%s\n", USAGE);
+				return (0);
+			}
+		}
+		else
+			break ;
+		(*argv)++;
 	}
+	return (1);
 }
 
 void	initialise_flags(t_ls **flags)
