@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/17 14:20:42 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/17 18:19:30 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,11 @@ void	initialise_flags(t_ls **flags);
 
 /* basic_display.c */
 void	basic_display(int a_flag);
+
+/* print_basic.c */
+void	print_basic(char **arr);
+
+/* sort_array.c */
+void	sort_arr(char ***arr);
+
 #endif

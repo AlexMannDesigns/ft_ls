@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   sort_array.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 18:39:01 by amann             #+#    #+#             */
-/*   Updated: 2022/03/17 17:42:38 by amann            ###   ########.fr       */
+/*   Created: 2022/03/17 16:36:03 by amann             #+#    #+#             */
+/*   Updated: 2022/03/17 17:32:34 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-//ft_printf("ft_ls: %s: No such file or directory\n", argv[i]);
-
-int	main(int argc, char **argv)
+void	sort_arr(char ***arr)
 {
-	t_ls	*flags;
+	int		i;
+	char	*temp;
 
-	if (argc == 1)
+	i = 0;
+	while ((*arr)[i + 1])
 	{
-		basic_display(FALSE);
-		return (0);
+		if (ft_strcmp((*arr)[i], (*arr)[i + 1]) > 0)
+		{
+			temp = (*arr)[i];
+			(*arr)[i] = (*arr)[i + 1];
+			(*arr)[i + 1] = temp;
+			i = 0;
+		}
+		else
+			i++;
 	}
-	flags = NULL;
-	initialise_flags(&flags);
-	if (!flags)
-		return (1);
-	if (!option_control(&argv, &flags))
-		return (1);
-	if (*argv)
-		ft_printf("%s\n", *argv);
-	if (!flags->list)
-		basic_display(flags->all);
-	return (0);
 }

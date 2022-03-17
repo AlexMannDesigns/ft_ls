@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:10:47 by amann             #+#    #+#             */
-/*   Updated: 2022/03/17 14:25:10 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/17 17:53:13 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	flag_control(char *s, t_ls **flags)
 	return (flag_control(s, flags));
 }
 
-int		option_control(char ***argv, t_ls **flags)
+int	option_control(char ***argv, t_ls **flags)
 {
 	(*argv)++;
 	while (**argv)
