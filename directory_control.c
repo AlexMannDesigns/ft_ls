@@ -6,14 +6,14 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:29:45 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 17:14:21 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/18 17:27:50 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
 //maybe add a version of this that takes a void** as arg to libft...
-static size_t	check_arr_len(void **arr)
+size_t	check_arr_len(void **arr)
 {
 	size_t	len;
 
