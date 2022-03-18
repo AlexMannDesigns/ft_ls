@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:10:47 by amann             #+#    #+#             */
-/*   Updated: 2022/03/17 17:53:13 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/18 13:03:37 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	option_control(char ***argv, t_ls **flags)
 
 void	initialise_flags(t_ls **flags)
 {
-	*flags = (t_ls *) malloc(sizeof(t_ls));
+	*flags = (t_ls *) ft_memalloc(sizeof(t_ls));
 	if (!(*flags))
 		return ;
 	(*flags)->list = FALSE;

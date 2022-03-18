@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/03/17 18:28:59 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/18 13:03:18 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,9 @@ void	basic_display(int all)
 	len = get_arr_len(all, "./");
 	if (!len)
 		return ;
-	arr = (char **) malloc((sizeof(char *) * len) + 1);
+	arr = (char **) ft_memalloc((sizeof(char *) * len) + 1);
 	if (!arr)
 		return ;
-	arr[len] = NULL;
 	populate_array(arr, "./", all);
 	sort_arr(&arr);
 	print_basic(arr);
