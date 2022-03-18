@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 12:49:11 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/18 17:01:42 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		option_control(char ***argv, t_ls **flags);
 void	initialise_flags(t_ls **flags);
 
 /* basic_display.c */
-void	basic_display(int a_flag);
+void	basic_display(char *dir_name, int a_flag);
 
 /* print_basic.c */
 void	print_basic(char **arr);
@@ -62,6 +62,9 @@ void	print_basic(char **arr);
 /* sort_array.c */
 void	sort_arr(char ***arr);
 
-/* directory control.c */
+/* directory_control.c */
 char	**directory_control(char **argv, t_ls *flags);
+
+/* validate_array.c */
+void	validate_arr(char ***arr);
 #endif

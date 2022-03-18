@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:29:45 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 14:16:01 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/18 17:14:21 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,6 @@ static void	copy_arr(char ***dest, char **src)
 	//ft_printf("%zu\n", i);
 }
 
-static void	validate_arr(char ***arr)
-{
-	size_t	i;
-	DIR		*current;
-	i = 0;
-	while ((*arr)[i])
-	{
-		current = opendir((*arr)[i]);
-		if (!current)
-		{
-			ft_printf("ft_ls: %s: No such file or directory\n", (*arr)[i]);
-			ft_memdel((void **)&((*arr)[i]));	
-		}
-		else
-			closedir(current);
-		i++;
-	}
-
-}
-
 char	**directory_control(char **argv, t_ls *flags)
 {
 	char	**file_arr;
@@ -67,13 +47,16 @@ char	**directory_control(char **argv, t_ls *flags)
 	if (!file_arr)
 		return (NULL);
 	copy_arr(&file_arr, argv);
+	if (flags->reverse)
+		return (argv);
 	sort_arr(&file_arr);
 //	ft_putendl("here");
 	validate_arr(&file_arr);
-	size_t i = 0;
-	while (i < arr_len)
-		ft_printf("%s\n", file_arr[i++]);
-		
-	ft_printf("len = %zu l_flag = %u\n", arr_len, flags->list);
-	return (argv);
+	arr_len = check_arr_len((void **)file_arr);
+	//size_t i = 0;
+	//while (file_arr[i])
+		//ft_printf("%s\n", file_arr[i++]);
+	
+	//ft_printf("len = %zu l_flag = %u\n", arr_len, flags->list);
+	return (file_arr);
 }

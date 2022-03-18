@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 13:03:18 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/18 17:01:15 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,18 @@ static void	populate_array(char **arr, char *dir_name, int all)
 	closedir(directory);
 }
 
-void	basic_display(int all)
+void	basic_display(char *dir_name, int all)
 {
 	char	**arr;
 	size_t	len;
 
-	len = get_arr_len(all, "./");
+	len = get_arr_len(all, dir_name);
 	if (!len)
 		return ;
 	arr = (char **) ft_memalloc((sizeof(char *) * len) + 1);
 	if (!arr)
 		return ;
-	populate_array(arr, "./", all);
+	populate_array(arr, dir_name, all);
 	sort_arr(&arr);
 	print_basic(arr);
 	ft_freearray((void ***)&arr, len);

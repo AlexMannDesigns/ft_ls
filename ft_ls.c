@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:39:01 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 13:56:34 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/18 17:18:59 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 
 //#include <sys/ioctl.h>
 //ft_printf("ft_ls: %s: No such file or directory\n", argv[i]);
+
+static void	display_control(char **arr, t_ls *flags)
+{
+	size_t	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		ft_printf("%s:\n", arr[i]);
+		basic_display(arr[i], flags->all);
+		if (arr[i + 1])
+			ft_putchar('\n');
+		i++;	
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -26,7 +41,7 @@ int	main(int argc, char **argv)
 //    printf ("columns %d\n", w.ws_col);
 	if (argc == 1)
 	{
-		basic_display(FALSE);
+		basic_display("./" , FALSE);
 		return (0);
 	}
 	flags = NULL;
@@ -36,9 +51,11 @@ int	main(int argc, char **argv)
 	if (!option_control(&argv, &flags))
 		return (1);
 	if (*argv)
+	{
 		file_arr = directory_control(argv, flags);		
+		display_control(file_arr, flags);
+	}
 	else if (!flags->list)             		
-		basic_display(flags->all);
-
+		basic_display("./", flags->all);
 	return (0);
 }
