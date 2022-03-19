@@ -6,7 +6,7 @@
 #    By: amann <amann@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/15 12:13:10 by amann             #+#    #+#              #
-#    Updated: 2022/03/15 13:39:09 by amann            ###   ########.fr        #
+#    Updated: 2022/03/19 18:08:22 by amann            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = conversion_control.c ft_printf.c	set_flags.c print_result.c hash_flag.c	\
 		n_conversion.c set_conv_type.c colours.c ft_printf_control.c			\
 		chop_chop.c print_result_functions.c zero_flag.c z_conversions.c
 OBJ = $(SRCS:.c=.o)
+LEAKS = -g -fsanitize=address
 
 all:
 	@gcc $(FLAGS) -c $(SRCS)
@@ -31,4 +32,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re 
+.PHONY: all clean fclean re

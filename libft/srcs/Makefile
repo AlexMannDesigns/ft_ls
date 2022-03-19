@@ -6,7 +6,7 @@
 #    By: amann <amann@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/01 13:44:30 by amann             #+#    #+#              #
-#    Updated: 2022/03/15 15:37:27 by amann            ###   ########.fr        #
+#    Updated: 2022/03/19 18:08:09 by amann            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ LIB =  ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c	
 		ft_itoa_base_unsigned.c	ft_abs_long.c
 OBJ = $(LIB:.c=.o)
 SRC_DIR = srcs/
+LEAKS = -g -fsanitize=address
 
 #rules
 all: $(NAME)
