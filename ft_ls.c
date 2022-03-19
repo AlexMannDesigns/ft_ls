@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:39:01 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 17:28:23 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/19 15:52:22 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	display_control(char **arr, t_ls *flags)
 			ft_putchar('\n');
 		i++;	
 	}
+	flags->reverse = 1;
 }
 
 int	main(int argc, char **argv)
@@ -52,8 +53,11 @@ int	main(int argc, char **argv)
 		return (1);
 	if (*argv)
 	{
+		//ft_putendl(*argv);
+
 		file_arr = directory_control(argv, flags);		
 		display_control(file_arr, flags);
+	
 	}
 	else if (!flags->list)             		
 		basic_display("./", flags->all);

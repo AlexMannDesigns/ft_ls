@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 17:01:15 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/19 15:45:23 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,16 @@ void	basic_display(char *dir_name, int all)
 	size_t	len;
 
 	len = get_arr_len(all, dir_name);
+	//ft_printf("%zu\n", len);
 	if (!len)
 		return ;
-	arr = (char **) ft_memalloc((sizeof(char *) * len) + 1);
+	arr = (char **) ft_memalloc(sizeof(char *) * (len + 1));
 	if (!arr)
 		return ;
 	populate_array(arr, dir_name, all);
 	sort_arr(&arr);
+	//ft_putendl("here");
+	
 	print_basic(arr);
 	ft_freearray((void ***)&arr, len);
 }

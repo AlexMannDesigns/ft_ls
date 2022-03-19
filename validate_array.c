@@ -6,17 +6,18 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:41:35 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 17:10:27 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/19 16:18:57 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-static void	trim_valid_arr(char ***arr, size_t len, size_t count)
+static void	trim_valid_arr(char ***arr, ssize_t len, ssize_t count)
 {
 	char	**new_arr;
-	size_t	orig_len;
+	ssize_t	orig_len;
 
+//	ft_printf("count: %zu  len: %zu\n", count, len);
 	orig_len = len;
 	new_arr = (char **) ft_memalloc(sizeof(char *) * (count + 1));
 	if (!new_arr)
@@ -24,8 +25,10 @@ static void	trim_valid_arr(char ***arr, size_t len, size_t count)
 		ft_freearray((void ***)arr, len);
 		return ;
 	}
-	while (len)
+	while (len >= 0)
 	{
+//		ft_printf("count: %zu  len: %zu\n", count, len);
+//		ft_putendl((*arr)[len]);
 		if ((*arr)[len])
 		{
 			count--;
@@ -44,14 +47,15 @@ static void	trim_valid_arr(char ***arr, size_t len, size_t count)
 
 void	validate_arr(char ***arr)
 {
-	size_t	len;
-	size_t	count;
+	ssize_t	len;
+	ssize_t	count;
 	DIR		*current;
 
 	len = 0;
 	count = 0;
 	while ((*arr)[len])
 	{
+//		ft_printf("%zu %s\n", len, (*arr)[len]);
 		current = opendir((*arr)[len]);
 		if (!current)
 		{
@@ -67,6 +71,7 @@ void	validate_arr(char ***arr)
 		}
 		len++;
 	}
-	trim_valid_arr(arr, len, count);
+	if (len > count)
+		trim_valid_arr(arr, len, count);
 }
 

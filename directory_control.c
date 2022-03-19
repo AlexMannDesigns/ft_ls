@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:29:45 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 17:27:50 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/19 16:19:53 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	**directory_control(char **argv, t_ls *flags)
 	size_t	arr_len;
 
 	arr_len = check_arr_len((void **)argv);
+//	ft_printf("%zu\n", arr_len);
 	file_arr = (char **) ft_memalloc(sizeof(char *) * (arr_len + 1));
 	if (!file_arr)
 		return (NULL);
@@ -50,11 +51,14 @@ char	**directory_control(char **argv, t_ls *flags)
 	if (flags->reverse)
 		return (argv);
 	sort_arr(&file_arr);
-//	ft_putendl("here");
+
+	//	ft_putendl("here");
 	validate_arr(&file_arr);
+//	ft_putendl(file_arr[0]);
+
 	arr_len = check_arr_len((void **)file_arr);
-	//size_t i = 0;
-	//while (file_arr[i])
+//	size_t i = 0;
+//	while (file_arr[i])
 		//ft_printf("%s\n", file_arr[i++]);
 	
 	//ft_printf("len = %zu l_flag = %u\n", arr_len, flags->list);
