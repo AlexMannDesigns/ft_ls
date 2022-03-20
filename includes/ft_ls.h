@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 17:27:25 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/20 13:16:12 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@
 
 # define TRUE 1
 # define FALSE 0
+
+# define RGF 1
+# define DRC 2
+# define LNK 3
+# define BLK 4
+# define CHR 5
+# define FFO 6
 
 # define FLAGS "lRart"
 # define USAGE	"usage: ./ft_ls -[alrRt] [file ...]"
@@ -68,5 +75,8 @@ char	**directory_control(char **argv, t_ls *flags);
 size_t	check_arr_len(void **arr);
 
 /* validate_array.c */
-void	validate_arr(char ***arr);
+void	validate_arr(char ***arr, t_ls *flags);
+
+/* check_file_type.c */
+unsigned int	check_file_type(mode_t st_mode);
 #endif

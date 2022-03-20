@@ -6,7 +6,7 @@
 #    By: amann <amann@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 17:55:31 by amann             #+#    #+#              #
-#    Updated: 2022/03/19 18:09:22 by amann            ###   ########.fr        #
+#    Updated: 2022/03/20 13:15:34 by amann            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = ft_ls
 FLAGS = -Wall -Werror -Wextra -ansi -pedantic -std=c99 -O3
 SRCS = ft_ls.c check_flags.c basic_display.c sort_array.c print_basic.c			\
-	   directory_control.c validate_array.c
+	   directory_control.c validate_array.c check_file_type.c 
 HEADER = -I includes/ft_ls.h
 OBJ = $(SRCS:.c=.o)
 LIB_DIR = libft/
