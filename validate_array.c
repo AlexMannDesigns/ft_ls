@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:41:35 by amann             #+#    #+#             */
-/*   Updated: 2022/03/20 13:49:52 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/20 14:46:13 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,6 @@ static void	trim_valid_arr(char ***arr, ssize_t len, ssize_t count)
 	(*arr) = new_arr;
 }
 
-void	print_files_and_links(char **files_arr)
-{
-	size_t	i;
-
-	i = 0;
-	while (files_arr[i])
-	{
-		ft_printf("%s\t", files_arr[i]);
-		i++;
-	}
-	ft_putstr("\n\n");
-}
-
 static char	**set_files_and_links(char ***arr, size_t fil_len, size_t arr_len)
 {
 	char 			**file_arr;
@@ -89,8 +76,33 @@ static char	**set_files_and_links(char ***arr, size_t fil_len, size_t arr_len)
 		}
 		i++;
 	}
-	//ft_putendl("----");
 	return (file_arr);
+}
+
+static void	validate_arr_loop(char ***arr, ssize_t *len, ssize_t *d_c, size_t *f_c)
+{
+	struct stat		stat_data;
+	unsigned int	type;
+
+	while ((*arr)[*len])
+	{
+//		ft_printf("%zu %s\n", len, (*arr)[len]);
+//		current = opendir((*arr)[len]);
+		if (stat((*arr)[*len], &stat_data))
+		{
+			ft_printf("ft_ls: %s: No such file or directory\n", (*arr)[*len]);
+			ft_memdel((void **)&((*arr)[*len]));	
+		}
+		else
+		{
+			type = check_file_type(stat_data.st_mode);
+			if (type == DRC)
+				(*d_c)++;
+			else
+				(*f_c)++;	//	ft_putendl((*arr)[len]);	
+		}
+		(*len)++;
+	}
 }
 
 void	validate_arr(char ***arr, t_ls *flags)
@@ -98,41 +110,22 @@ void	validate_arr(char ***arr, t_ls *flags)
 	ssize_t			len;
 	ssize_t			dir_count;
 	size_t			fil_count;
-	struct stat		stat_data;
-	unsigned int	type;
 	char			**files_and_links;
 	
-	len = fil_count = dir_count = 0;
-	while ((*arr)[len])
-	{
-//		ft_printf("%zu %s\n", len, (*arr)[len]);
-//		current = opendir((*arr)[len]);
-		if (stat((*arr)[len], &stat_data))
-		{
-			ft_printf("ft_ls: %s: No such file or directory\n", (*arr)[len]);
-			ft_memdel((void **)&((*arr)[len]));	
-		}
-		else
-		{
-			type = check_file_type(stat_data.st_mode);
-			if (type == DRC)
-				dir_count++;
-			else
-			{
-				fil_count++;
-			//	ft_putendl((*arr)[len]);	
-			}
-		}
-		len++;
-	}
-//	ft_putendl("-----");
+	len = 0; 
+	fil_count = 0;
+	dir_count = 0;
+	validate_arr_loop(arr, &len, &dir_count, &fil_count);
 	if (fil_count)
 	{
 		files_and_links = set_files_and_links(arr, fil_count, len);
 		if (!flags->list) 
-			print_files_and_links(files_and_links);
+			print_basic(files_and_links);
+		//print_files_and_links(files_and_links);
 		//ft_putendl("hello");
 		ft_freearray((void ***)&files_and_links, fil_count);
+		if (dir_count)
+			ft_putchar('\n');
 	}
 	if (len > dir_count)
 		trim_valid_arr(arr, len, dir_count);

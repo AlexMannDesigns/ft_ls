@@ -6,15 +6,15 @@
 #    By: amann <amann@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 17:55:31 by amann             #+#    #+#              #
-#    Updated: 2022/03/20 13:15:34 by amann            ###   ########.fr        #
+#    Updated: 2022/03/20 15:48:32 by amann            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #variables
 NAME = ft_ls
 FLAGS = -Wall -Werror -Wextra -ansi -pedantic -std=c99 -O3
-SRCS = ft_ls.c check_flags.c basic_display.c sort_array.c print_basic.c			\
-	   directory_control.c validate_array.c check_file_type.c 
+SRCS = ft_ls.c check_flags.c display_control.c sort_array.c print_basic.c			\
+	   directory_control.c validate_array.c check_file_type.c print_list.c 
 HEADER = -I includes/ft_ls.h
 OBJ = $(SRCS:.c=.o)
 LIB_DIR = libft/
@@ -52,7 +52,8 @@ leak_test:
 #	@$(MAKE) -C $(LIB_DIR) test_clean
 
 tclean:
-	@/bin/rm $(NAME) $(OBJ)
+	@/bin/rm -rf $(NAME).dSYM
+	@/bin/rm -f $(NAME) $(OBJ)
 
 tre: tclean test
 

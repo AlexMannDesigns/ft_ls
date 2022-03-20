@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/20 13:16:12 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/20 15:25:53 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,14 @@ typedef struct s_ls
 int		option_control(char ***argv, t_ls **flags);
 void	initialise_flags(t_ls **flags);
 
-/* basic_display.c */
-void	basic_display(char *dir_name, int a_flag);
+/* display_control.c */
+void	display_control(char *dir_name, t_ls *flag);
 
 /* print_basic.c */
 void	print_basic(char **arr);
+
+/* print_list.c */
+void	print_list(char **arr);
 
 /* sort_array.c */
 void	sort_arr(char ***arr);
