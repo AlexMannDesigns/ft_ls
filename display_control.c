@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/03/21 11:28:56 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/21 17:44:19 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static DIR	*open_directory(char *dir_name)
 {
 	DIR	*directory;
-
+	
 	directory = opendir(dir_name);
 	if (!directory)
 	{
@@ -78,6 +78,7 @@ void	display_control(char *dir_name, t_ls *flags)
 {
 	char	**arr;
 	size_t	len;
+	//char	*next_dir;
 
 	len = get_arr_len(flags->all, dir_name);
 	//ft_printf("%zu\n", len);
