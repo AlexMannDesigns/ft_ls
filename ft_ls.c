@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:39:01 by amann             #+#    #+#             */
-/*   Updated: 2022/03/20 15:28:44 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/21 11:31:54 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void	display_loop(char **arr, t_ls *flags)
 	i = 0;
 	while (arr[i])
 	{
-		ft_printf("%s:\n", arr[i]);
+		if (arr[1])
+			ft_printf("%s:\n", arr[i]);
 		display_control(arr[i], flags);
 		if (arr[i + 1])
 			ft_putchar('\n');
@@ -46,7 +47,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (argc == 1)
 	{
-		display_control("./" , flags);
+		display_control("./", flags);
 		return (0);
 	}
 	file_arr = NULL;

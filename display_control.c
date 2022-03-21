@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/03/20 15:26:35 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/21 11:28:56 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	display_control(char *dir_name, t_ls *flags)
 	sort_arr(&arr);
 	//ft_putendl("here");
 	if (flags->list)
-		print_list(arr);
+		print_list(arr, dir_name);
 	else
 		print_basic(arr);
 	ft_freearray((void ***)&arr, len);

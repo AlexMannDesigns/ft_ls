@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/20 15:25:53 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/21 11:29:36 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	display_control(char *dir_name, t_ls *flag);
 void	print_basic(char **arr);
 
 /* print_list.c */
-void	print_list(char **arr);
+void	print_list(char **arr, char *path);
 
 /* sort_array.c */
 void	sort_arr(char ***arr);
