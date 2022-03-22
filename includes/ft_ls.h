@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/21 16:10:50 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/22 12:41:44 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	print_basic(char **arr);
 
 /* print_list.c */
 void	print_list(char **arr, char *path);
-char	*create_file_path(char *name, char *path);
+char	*create_file_path(char *name, char *path, unsigned int list);
 
 /* permissions_control.c */
 void	handle_permissions_and_type(mode_t mode);

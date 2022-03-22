@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/03/21 17:44:19 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/22 12:42:07 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static DIR	*open_directory(char *dir_name)
 {
 	DIR	*directory;
-	
+
+//	ft_printf("dir name: %s\n", dir_name);
 	directory = opendir(dir_name);
 	if (!directory)
 	{
@@ -74,7 +75,7 @@ static void	populate_array(char **arr, char *dir_name, unsigned int all)
 	closedir(directory);
 }
 
-void	display_control(char *dir_name, t_ls *flags)
+static void	sort_and_print(char *dir_name, t_ls *flags)
 {
 	char	**arr;
 	size_t	len;
@@ -95,4 +96,39 @@ void	display_control(char *dir_name, t_ls *flags)
 	else
 		print_basic(arr);
 	ft_freearray((void ***)&arr, len);
+}
+
+void static	recursion_handler(char *file_path, t_ls *flags)
+{
+	ft_printf("\n%s:\n", file_path);
+	display_control(file_path, flags);
+}
+
+void	display_control(char *dir, t_ls *flags)
+{
+	DIR				*directory;
+	struct dirent	*next_filename;
+	char			*file_name;
+	char			*file_path;
+	struct stat		stat_data;
+
+	sort_and_print(dir, flags);
+//check R flag
+	if (flags->recursive)
+	{
+		directory = open_directory(dir);
+		next_filename = readdir(directory);
+		while (next_filename)
+		{
+			file_name = next_filename->d_name;
+			file_path = create_file_path(file_name, dir, FALSE);
+			stat(file_path, &stat_data);
+			if (!flags->all && (file_name[0] != '.') && S_ISDIR(stat_data.st_mode))
+				recursion_handler(file_path, flags);
+			else if (flags->all && S_ISDIR(stat_data.st_mode))
+				recursion_handler(file_path, flags);
+			next_filename = readdir(directory);		
+		}
+		closedir(directory);
+	}
 }

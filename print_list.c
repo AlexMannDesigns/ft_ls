@@ -6,20 +6,23 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:58:39 by amann             #+#    #+#             */
-/*   Updated: 2022/03/21 14:24:10 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/22 12:56:56 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-char	*create_file_path(char *name, char *path)
+char	*create_file_path(char *name, char *path, unsigned int list)
 {
 	char	*res;
 	char	*temp;
 
-	if (!ft_strcmp(path, "./"))
+	if (list && ft_strcmp(path, "./") == 0)
 		return (ft_strdup(name));
-	temp = ft_strjoin(path, "/");
+	if (list || ft_strcmp(path, "./"))
+		temp = ft_strjoin(path, "/");
+	else
+		temp = ft_strdup(path);
 	res = ft_strjoin(temp, name);
 	free(temp);
 	return (res);
@@ -38,7 +41,7 @@ void	print_list(char **arr, char *path)
 	i = 0;
 	while (arr[i])
 	{
-		file_path = create_file_path(arr[i], path);
+		file_path = create_file_path(arr[i], path, TRUE);
 		lstat(file_path, &stat_data);
 		handle_permissions_and_type(stat_data.st_mode);
 		ft_printf("%s\n", arr[i]);

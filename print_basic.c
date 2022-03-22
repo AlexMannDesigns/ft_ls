@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:14:55 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 11:43:44 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/22 12:14:15 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static size_t	set_col_width(char **arr)
 
 static size_t	set_col_number(size_t col_width)
 {
-	if (col_width > 30)
+	if (col_width > 50)
 		return (1);
 	else
 		return (5);
