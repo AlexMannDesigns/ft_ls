@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:50:21 by amann             #+#    #+#             */
-/*   Updated: 2022/03/21 11:50:37 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/22 15:04:01 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void add_file_type(char *perm_str, mode_t mode)
 	else if (type == CHR)
 		perm_str[0] = 'c';
 	else if (type == FFO)
-		perm_str[0] = 'f'; 
+		perm_str[0] = 'p'; 
 	else if (type == RGF)
 		perm_str[0] ='-';
 }
@@ -41,8 +41,12 @@ static void	add_user_permissions(char *perm_str, mode_t mode)
 		perm_str[2] = 'w';
 	else
 		perm_str[2] = '-';
-	if (mode & S_IXUSR)
-		perm_str[3] = 'x';
+	if ((mode & S_IXUSR) && (mode & S_ISUID))
+		perm_str[3] = 's';
+	else if (!(mode & S_IXUSR) && (mode & S_ISUID))
+		perm_str[3] = 'S';
+	else if (mode & S_IXUSR)
+		perm_str[3] = 'x';	
 	else
 		perm_str[3] = '-';
 }
@@ -57,8 +61,12 @@ static void	add_group_permissions(char *perm_str, mode_t mode)
 		perm_str[5] = 'w';
 	else
 		perm_str[5] = '-';
-	if (mode & S_IXGRP)
-		perm_str[6] = 'x';
+	if ((mode & S_IXGRP) && (mode & S_ISGID))     	
+		perm_str[6] = 's';
+	else if (!(mode & S_IXGRP) && (mode & S_ISGID))
+		perm_str[6] = 'S';
+	else if (mode & S_IXGRP)                      	
+		perm_str[6] = 'x';	
 	else
 		perm_str[6] = '-';
 }

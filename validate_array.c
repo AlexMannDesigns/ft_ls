@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:41:35 by amann             #+#    #+#             */
-/*   Updated: 2022/03/20 14:46:13 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/22 16:07:14 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static void	validate_arr_loop(char ***arr, ssize_t *len, ssize_t *d_c, size_t *f
 	}
 }
 
-void	validate_arr(char ***arr, t_ls *flags)
+void	validate_arr(char ***arr, t_ls *flags, unsigned int *files_printed)
 {
 	ssize_t			len;
 	ssize_t			dir_count;
@@ -119,7 +119,9 @@ void	validate_arr(char ***arr, t_ls *flags)
 	if (fil_count)
 	{
 		files_and_links = set_files_and_links(arr, fil_count, len);
-		if (!flags->list) 
+		if (flags->list) 
+			print_list(files_and_links, "./", FALSE, fil_count);
+		else
 			print_basic(files_and_links);
 		//print_files_and_links(files_and_links);
 		//ft_putendl("hello");
@@ -128,6 +130,9 @@ void	validate_arr(char ***arr, t_ls *flags)
 			ft_putchar('\n');
 	}
 	if (len > dir_count)
+	{
+		*files_printed = TRUE;
 		trim_valid_arr(arr, len, dir_count);
+	}
 }
 

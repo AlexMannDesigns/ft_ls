@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:39:01 by amann             #+#    #+#             */
-/*   Updated: 2022/03/21 16:10:28 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/22 15:21:48 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 //#include <sys/ioctl.h>
 //ft_printf("ft_ls: %s: No such file or directory\n", argv[i]);
 
-static void	display_loop(char **arr, t_ls *flags)
+static void	display_loop(char **arr, t_ls *flags, unsigned int files_printed)
 {
 	size_t	i;
 
 	i = 0;
 	while (arr[i])
 	{
-		if (arr[1])
+		//ft_printf("%u\n", files_printed);
+		if (arr[1] || files_printed)
 			ft_printf("%s:\n", arr[i]);
 		display_control(arr[i], flags);
 		if (arr[i + 1])
@@ -33,14 +34,16 @@ static void	display_loop(char **arr, t_ls *flags)
 
 int	main(int argc, char **argv)
 {
-	t_ls	*flags;
-	char	**file_arr;
+	t_ls			*flags;
+	char			**file_arr;
+	unsigned int	files_printed;
 //	struct winsize w;
 //    ioctl(0, TIOCGWINSZ, &w);
 //
 //    printf ("lines %d\n", w.ws_row);
 //    printf ("columns %d\n", w.ws_col);
 	flags = NULL;
+	files_printed = FALSE;
 	initialise_flags(&flags);
 	if (!flags)
 		return (1);
@@ -56,8 +59,8 @@ int	main(int argc, char **argv)
 	if (*argv)
 	{
 		//ft_putendl(*argv);
-		file_arr = directory_control(argv, flags);		
-		display_loop(file_arr, flags);	
+		file_arr = directory_control(argv, flags, &files_printed);		
+		display_loop(file_arr, flags, files_printed);	
 	}
 	else          		
 		display_control("./", flags);

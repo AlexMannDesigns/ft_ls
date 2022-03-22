@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:29:45 by amann             #+#    #+#             */
-/*   Updated: 2022/03/21 14:09:01 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/22 15:17:56 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	copy_arr(char ***dest, char **src)
 	//ft_printf("%zu\n", i);
 }
 
-char	**directory_control(char **argv, t_ls *flags)
+char	**directory_control(char **argv, t_ls *flags, unsigned int *files_printed)
 {
 	char	**file_arr;
 	size_t	arr_len;
@@ -48,14 +48,10 @@ char	**directory_control(char **argv, t_ls *flags)
 	if (!file_arr)
 		return (NULL);
 	copy_arr(&file_arr, argv);
-	if (flags->reverse)
-		return (argv);
 	sort_arr(&file_arr);
-
 	//	ft_putendl("here");
-	validate_arr(&file_arr, flags);
+	validate_arr(&file_arr, flags, files_printed);
 //	ft_putendl(file_arr[0]);
-
 	arr_len = check_arr_len((void **)file_arr);
 //	size_t i = 0;
 //	while (file_arr[i])

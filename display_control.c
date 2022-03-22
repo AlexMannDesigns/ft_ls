@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/03/22 12:42:07 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/22 16:09:08 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ static void	sort_and_print(char *dir_name, t_ls *flags)
 
 	len = get_arr_len(flags->all, dir_name);
 	//ft_printf("%zu\n", len);
+	//ft_putendl(dir_name);
+	
 	if (!len)
 		return ;
 	arr = (char **) ft_memalloc(sizeof(char *) * (len + 1));
@@ -90,9 +92,8 @@ static void	sort_and_print(char *dir_name, t_ls *flags)
 		return ;
 	populate_array(arr, dir_name, flags->all);
 	sort_arr(&arr);
-	//ft_putendl("here");
 	if (flags->list)
-		print_list(arr, dir_name);
+		print_list(arr, dir_name, TRUE, len);
 	else
 		print_basic(arr);
 	ft_freearray((void ***)&arr, len);
@@ -113,7 +114,6 @@ void	display_control(char *dir, t_ls *flags)
 	struct stat		stat_data;
 
 	sort_and_print(dir, flags);
-//check R flag
 	if (flags->recursive)
 	{
 		directory = open_directory(dir);
