@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/03/22 16:09:08 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/23 18:50:29 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	sort_and_print(char *dir_name, t_ls *flags)
 	if (!arr)
 		return ;
 	populate_array(arr, dir_name, flags->all);
-	sort_arr(&arr);
+	sort_arr(&arr, flags);
 	if (flags->list)
 		print_list(arr, dir_name, TRUE, len);
 	else

@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/03/19 18:03:22 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/23 18:47:36 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	populate_array(char **arr, char *dir_name, int all)
 	closedir(directory);
 }
 
-void	basic_display(char *dir_name, int all)
+void	basic_display(char *dir_name, int all, t_ls *flags)
 {
 	char	**arr;
 	size_t	len;
@@ -87,7 +87,7 @@ void	basic_display(char *dir_name, int all)
 	if (!arr)
 		return ;
 	populate_array(arr, dir_name, all);
-	sort_arr(&arr);
+	sort_arr(&arr, flags);
 	//ft_putendl("here");
 	
 	print_basic(arr);

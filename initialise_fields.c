@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 12:27:08 by amann             #+#    #+#             */
-/*   Updated: 2022/03/23 12:49:37 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/23 14:24:58 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	init_fields(t_fields *f_width, char **arr, char *path, size_t len)
 	f_width->user_arr = (char **) ft_memalloc(sizeof(char *) * len);
 	f_width->group_arr = (char **) ft_memalloc(sizeof(char *) * len);
 	f_width->size_arr = (char **) ft_memalloc(sizeof(char *) * len);
+	f_width->blocks = 0;
 	//ft_printf("%zu\n", len);
 	if (!w_arr)
 		return ; //failsafe needed to set all widths to a value...
@@ -76,6 +77,7 @@ void	init_fields(t_fields *f_width, char **arr, char *path, size_t len)
 			{
 				(f_width->links_arr)[j] = ft_itoa(stat_data.st_nlink);
 				w_arr[j] = ft_strlen((f_width->links_arr)[j]);
+				f_width->blocks += stat_data.st_blocks;
 			}
 			else if (i == 1)
 			{	

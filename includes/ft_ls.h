@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/23 12:41:25 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/23 18:46:55 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,16 @@ typedef struct s_ls
 
 typedef struct s_fields
 {
-	size_t	links;
-	size_t	user;
-	size_t	group;
-	size_t	size;
-	char	**links_arr;
-	char	**user_arr;
-	char	**group_arr;
-	char	**size_arr;
-}			t_fields;
+	size_t			links;
+	size_t			user;
+	size_t			group;
+	size_t			size;
+	long long int	blocks;
+	char			**links_arr;
+	char			**user_arr;
+	char			**group_arr;
+	char			**size_arr;
+}					t_fields;
 
 /***** FUNCTION PROTOTYPING *****/
 
@@ -89,7 +90,7 @@ void	handle_permissions_and_type(mode_t mode);
 void	init_fields(t_fields *f_width, char **arr, char *path, size_t len);
 
 /* sort_array.c */
-void	sort_arr(char ***arr);
+void	sort_arr(char ***arr, t_ls *flags);
 
 /* directory_control.c */
 char	**directory_control(char **argv, t_ls *flags, unsigned int *files_printed);
