@@ -6,13 +6,13 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 12:27:08 by amann             #+#    #+#             */
-/*   Updated: 2022/03/23 14:24:58 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/24 18:38:01 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-static char	*username(uid_t st_uid)
+char	*username(uid_t st_uid)
 {
 	struct passwd	*pwd;
 

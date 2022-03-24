@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/23 18:46:55 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/24 18:06:25 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 
 # define TRUE 1
 # define FALSE 0
+
+# define LS_BUF_SIZE 100
 
 # define RGF 1
 # define DRC 2
@@ -65,6 +67,22 @@ typedef struct s_fields
 	char			**size_arr;
 }					t_fields;
 
+typedef struct s_file_info
+{
+	unsigned int	type;
+	char			*name;
+	char			*dir_name;
+	char			*path;
+	uid_t			user;
+	gid_t			group;
+	time_t			modified;
+	time_t			created;
+	int				links;
+	long long int	blocks;
+	long long int	size;
+	char			*links_to;
+}					t_file_info;
+
 /***** FUNCTION PROTOTYPING *****/
 
 /* ft_ls.c */
@@ -92,6 +110,9 @@ void	init_fields(t_fields *f_width, char **arr, char *path, size_t len);
 /* sort_array.c */
 void	sort_arr(char ***arr, t_ls *flags);
 
+/* sort_node_list.c */
+void	sort_node_list(t_list **list, t_ls *flags);
+
 /* directory_control.c */
 char	**directory_control(char **argv, t_ls *flags, unsigned int *files_printed);
 
@@ -102,4 +123,10 @@ void	validate_arr(char ***arr, t_ls *flags, unsigned int *files_printed);
 
 /* check_file_type.c */
 unsigned int	check_file_type(mode_t st_mode);
+
+/* list_constructor.c */
+void	list_constructor(char *dir, t_ls *flags);
+
+/* check_malloc.c */
+int		check_struct_malloc(t_file_info **info);
 #endif
