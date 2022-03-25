@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:50:38 by amann             #+#    #+#             */
-/*   Updated: 2022/03/25 14:37:41 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/25 18:35:56 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ static void	populate_file_info(t_file_info **info, char *file_name, char *dir)
 	(*info)->group = stat_data.st_gid;
 	(*info)->modified = stat_data.st_mtime;
 	(*info)->created = stat_data.st_ctime;
+
+
 	(*info)->links = stat_data.st_nlink;
+
 	(*info)->blocks = stat_data.st_blocks;
+
 	(*info)->size = stat_data.st_size;
 	if ((*info)->type == LNK)
 	{
@@ -42,6 +46,7 @@ static void	populate_file_info(t_file_info **info, char *file_name, char *dir)
 	}
 	else
 		(*info)->links_to = NULL;
+
 }
 
 static t_file_info	*initialise_file_info(char *file_name, char *dir)
@@ -69,14 +74,16 @@ static t_file_info	*initialise_file_info(char *file_name, char *dir)
 	return (res);
 }
 
-static void	list_const_helper(char *file_name, char *dir, t_list **file_list)
+void	list_const_helper(char *file_name, char *dir, t_list **file_list)
 {
 	t_file_info	*temp;
 
 	temp = initialise_file_info(file_name, dir);
+	
 	if (!temp)
 		return ;
 	ft_lstadd_back(file_list, ft_lstnew((void *)temp, sizeof(t_file_info)));
+
 }
 
 t_list	*list_constructor(char *dir, t_ls *flags, size_t *len)
@@ -88,6 +95,12 @@ t_list	*list_constructor(char *dir, t_ls *flags, size_t *len)
 
 	file_list = NULL;	
 	directory = opendir(dir);
+//	if (!directory)
+//	{
+//		list_const_helper(dir, "./", &file_list);
+//		*len = 1;
+//		return (file_list);
+//	}
 	next_filename = readdir(directory);
 	while (next_filename)
 	{

@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/25 16:28:41 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/25 18:39:41 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	display_control(char *dir_name, t_ls *flag);
 void	print_basic(char **arr);
 
 /* print_list.c */
-void	print_list(t_list *list, size_t list_len);
+void	print_list(t_list *list, size_t list_len, unsigned int print_dir);
 char	*create_file_path(char *name, char *path, unsigned int list);
 
 /* permissions_control.c */
@@ -128,7 +128,12 @@ unsigned int	check_file_type(mode_t st_mode);
 
 /* list_constructor.c */
 t_list	*list_constructor(char *dir, t_ls *flags, size_t *len);
+void	list_const_helper(char *file_name, char *dir, t_list **file_list);
 
 /* check_malloc.c */
 int		check_struct_malloc(t_file_info **info);
+
+/* file_display_control.c */
+void	file_display_control(char **arr, t_ls *flags);
+
 #endif

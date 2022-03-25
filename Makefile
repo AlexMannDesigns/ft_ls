@@ -6,7 +6,7 @@
 #    By: amann <amann@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 17:55:31 by amann             #+#    #+#              #
-#    Updated: 2022/03/24 18:07:45 by amann            ###   ########.fr        #
+#    Updated: 2022/03/25 18:07:02 by amann            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FLAGS = -Wall -Werror -Wextra -ansi -pedantic -std=c99 -O3
 SRCS = ft_ls.c check_flags.c display_control.c sort_array.c print_basic.c			\
 	   directory_control.c validate_array.c check_file_type.c print_list.c			\
 	   permissions_control.c initialise_fields.c list_constructor.c check_malloc.c	\
-	   sort_node_list.c	   
+	   sort_node_list.c	file_display_control.c 
 HEADER = -I includes/ft_ls.h
 OBJ = $(SRCS:.c=.o)
 LIB_DIR = libft/
