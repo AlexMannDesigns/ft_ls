@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/24 18:06:25 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/25 16:28:41 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define FALSE 0
 
 # define LS_BUF_SIZE 100
+# define SIX_MONTHS_IN_SECONDS 15778463
 
 # define RGF 1
 # define DRC 2
@@ -69,6 +70,7 @@ typedef struct s_fields
 
 typedef struct s_file_info
 {
+	struct stat		stats;
 	unsigned int	type;
 	char			*name;
 	char			*dir_name;
@@ -98,14 +100,14 @@ void	display_control(char *dir_name, t_ls *flag);
 void	print_basic(char **arr);
 
 /* print_list.c */
-void	print_list(char **arr, char *path, unsigned int is_dir, size_t arr_len);
+void	print_list(t_list *list, size_t list_len);
 char	*create_file_path(char *name, char *path, unsigned int list);
 
 /* permissions_control.c */
-void	handle_permissions_and_type(mode_t mode);
+void	handle_permissions_and_type(t_file_info *file);
 
 /* initialise_fields.c */
-void	init_fields(t_fields *f_width, char **arr, char *path, size_t len);
+void	init_fields(t_fields *f_width, t_list *list, size_t len);
 
 /* sort_array.c */
 void	sort_arr(char ***arr, t_ls *flags);
@@ -125,7 +127,7 @@ void	validate_arr(char ***arr, t_ls *flags, unsigned int *files_printed);
 unsigned int	check_file_type(mode_t st_mode);
 
 /* list_constructor.c */
-void	list_constructor(char *dir, t_ls *flags);
+t_list	*list_constructor(char *dir, t_ls *flags, size_t *len);
 
 /* check_malloc.c */
 int		check_struct_malloc(t_file_info **info);

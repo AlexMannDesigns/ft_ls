@@ -6,17 +6,14 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:50:21 by amann             #+#    #+#             */
-/*   Updated: 2022/03/22 15:04:01 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/25 14:09:53 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-static void add_file_type(char *perm_str, mode_t mode)
+static void add_file_type(char *perm_str, unsigned int type)
 {
-	unsigned int	type;
-
-	type = check_file_type(mode);
 	if (type == DRC)
 		perm_str[0] = 'd';
 	else if (type == LNK)
@@ -87,17 +84,17 @@ static void	add_other_permissions(char *perm_str, mode_t mode)
 		perm_str[9] = '-';
 }
 
-void	handle_permissions_and_type(mode_t mode)
+void	handle_permissions_and_type(t_file_info *file)
 {
 	char	*perm_str;
 
 	perm_str = ft_strnew(11);
 	if (!perm_str)
 		return ;
-	add_file_type(perm_str, mode);
-	add_user_permissions(perm_str, mode);
-	add_group_permissions(perm_str, mode);
-	add_other_permissions(perm_str, mode);		
+	add_file_type(perm_str, file->type);
+	add_user_permissions(perm_str, file->stats.st_mode);
+	add_group_permissions(perm_str, file->stats.st_mode);
+	add_other_permissions(perm_str, file->stats.st_mode);		
 	ft_printf("%-11s", perm_str);
 	free(perm_str);
 }

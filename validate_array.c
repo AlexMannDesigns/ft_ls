@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:41:35 by amann             #+#    #+#             */
-/*   Updated: 2022/03/22 16:07:14 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/25 14:14:07 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,9 @@ void	validate_arr(char ***arr, t_ls *flags, unsigned int *files_printed)
 	{
 		files_and_links = set_files_and_links(arr, fil_count, len);
 		if (flags->list) 
-			print_list(files_and_links, "./", FALSE, fil_count);
-		else
-			print_basic(files_and_links);
+			printf("hello");
+	//else
+	//		print_basic(files_and_links);
 		//print_files_and_links(files_and_links);
 		//ft_putendl("hello");
 		ft_freearray((void ***)&files_and_links, fil_count);

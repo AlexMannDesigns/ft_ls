@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 12:27:08 by amann             #+#    #+#             */
-/*   Updated: 2022/03/24 18:38:01 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/25 16:53:06 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,59 +46,55 @@ static void	max_width(t_fields *f_width, size_t *w_arr, size_t col, size_t len)
 		f_width->size = max + 1;
 }
 
-void	init_fields(t_fields *f_width, char **arr, char *path, size_t len)
+void	init_fields(t_fields *f_width, t_list *list, size_t len)
 {
 	size_t		i;
 	size_t		j;
 	size_t		*w_arr;
-	char		*file_path;
-	struct stat	stat_data;
-	//malloc new size_t array
-	//create strings for each value and strlen them into the array
-	//find max value in array and update struct
+	t_list		*head;
+	t_file_info	*node;
+
+	i = 0;
 	w_arr = (size_t *) ft_memalloc(sizeof(size_t) * len);
 	f_width->links_arr = (char **) ft_memalloc(sizeof(char *) * len);
 	f_width->user_arr = (char **) ft_memalloc(sizeof(char *) * len);
 	f_width->group_arr = (char **) ft_memalloc(sizeof(char *) * len);
 	f_width->size_arr = (char **) ft_memalloc(sizeof(char *) * len);
 	f_width->blocks = 0;
-	//ft_printf("%zu\n", len);
-	if (!w_arr)
-		return ; //failsafe needed to set all widths to a value...
-	i = 0;
+	head = list;
 	while (i < 4)
 	{
 		j = 0;
-		while (j < len)
+		while (list)
 		{
-			file_path = create_file_path(arr[j], path, TRUE);
-			lstat(file_path, &stat_data);
+			node = (t_file_info *)list->content;
 			if (i == 0)
 			{
-				(f_width->links_arr)[j] = ft_itoa(stat_data.st_nlink);
+				(f_width->links_arr)[j] = ft_itoa(node->links);
 				w_arr[j] = ft_strlen((f_width->links_arr)[j]);
-				f_width->blocks += stat_data.st_blocks;
+           	 	f_width->blocks += node->blocks;
 			}
-			else if (i == 1)
-			{	
-				(f_width->user_arr)[j] = ft_strdup(username(stat_data.st_uid));	
-				w_arr[j] = ft_strlen((f_width->user_arr)[j]);
-			}
-			else if (i == 2)
-			{
-				(f_width->group_arr)[j] = ft_itoa(stat_data.st_gid);
-				w_arr[j] = ft_strlen((f_width->group_arr)[j]);
-			}
-			else if (i == 3)
-			{
-				(f_width->size_arr)[j] = ft_itoa_base(stat_data.st_size, 10);
-				w_arr[j] = ft_strlen((f_width->size_arr)[j]);
-			}
-			free(file_path);
+			if (i == 1)
+            {
+            	(f_width->user_arr)[j] = ft_strdup(username(node->user));
+            	w_arr[j] = ft_strlen((f_width->user_arr)[j]);
+            }
+			if (i == 2)
+           	{
+           		(f_width->group_arr)[j] = ft_itoa(node->group);
+           		w_arr[j] = ft_strlen((f_width->group_arr)[j]);
+           	}
+			if (i == 3)                                        	
+		   	{                                               	
+		   		(f_width->size_arr)[j] = ft_itoa_base(node->size, 10);	
+		   		w_arr[j] = ft_strlen((f_width->size_arr)[j]);	
+		   	}                                               	
+			list = list->next;
 			j++;
 		}
-		max_width(f_width, w_arr, i, len);		
+		max_width(f_width, w_arr, i, len);
 		i++;
+		list = head;	
 	}
 	free(w_arr);
-}
+}              

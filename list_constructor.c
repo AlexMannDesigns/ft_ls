@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:50:38 by amann             #+#    #+#             */
-/*   Updated: 2022/03/24 18:10:07 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/25 14:37:41 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	populate_file_info(t_file_info **info, char *file_name, char *dir)
 	if (!file_path)
 		return ;
 	lstat(file_path, &stat_data);
+	(*info)->stats = stat_data;
 	(*info)->type = check_file_type(stat_data.st_mode);
 	(*info)->name = ft_strdup(file_name);
 	(*info)->dir_name = ft_strdup(dir);
@@ -78,7 +79,7 @@ static void	list_const_helper(char *file_name, char *dir, t_list **file_list)
 	ft_lstadd_back(file_list, ft_lstnew((void *)temp, sizeof(t_file_info)));
 }
 
-void	list_constructor(char *dir, t_ls *flags)
+t_list	*list_constructor(char *dir, t_ls *flags, size_t *len)
 {
 	t_list			*file_list;
 	DIR				*directory;
@@ -96,15 +97,16 @@ void	list_constructor(char *dir, t_ls *flags)
 	    else if (flags->all)
 			list_const_helper(name, dir, &file_list);
        	next_filename = readdir(directory);		
+		*len += 1;
 	}
 	sort_node_list(&file_list, flags);
-	ft_putendl("-------------");
-	while (file_list)
-	{
-		ft_putendl(((t_file_info *)file_list->content)->name);
-		file_list = file_list->next;	
-	}
-	ft_putendl("-------------");
-
+//	ft_putendl("-------------");
+//	while (file_list)
+//	{
+//		ft_putendl(((t_file_info *)file_list->content)->name);
+//		file_list = file_list->next;	
+//	}
+//	ft_putendl("-------------");
 	closedir(directory);
+	return (file_list);
 }
