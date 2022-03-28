@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 16:36:03 by amann             #+#    #+#             */
-/*   Updated: 2022/03/23 18:51:04 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/28 13:20:31 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	arr_swap(char ***arr, int *i)
 	(*i) = 0;
 }
 
-void	sort_arr(char ***arr, t_ls *flags)
+void	sort_arr(char ***arr, t_ls *flags, unsigned int sanitising)
 {
 	int		i;
 
@@ -32,7 +32,7 @@ void	sort_arr(char ***arr, t_ls *flags)
 	//	ft_putendl((*arr)[i]);
 	//	ft_putendl((*arr)[i + 1]);
 	//	ft_putendl("-----");
-		if (!flags->reverse)
+		if (!flags->reverse || sanitising)
 		{
 			if (ft_strcmp((*arr)[i], (*arr)[i + 1]) > 0)
 				arr_swap(arr, &i);

@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/25 18:39:41 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/28 13:20:56 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,15 @@ void	handle_permissions_and_type(t_file_info *file);
 /* initialise_fields.c */
 void	init_fields(t_fields *f_width, t_list *list, size_t len);
 
+/* init_fields_loop.c */
+void	init_fields_loop(t_list *list, t_fields *f_width, size_t *w_arr, size_t i);
+
+/* user_and_grooup.c */
+char	*username(uid_t st_uid);
+char	*group_id(gid_t grp_id);
+
 /* sort_array.c */
-void	sort_arr(char ***arr, t_ls *flags);
+void	sort_arr(char ***arr, t_ls *flags, unsigned int sanitising);
 
 /* sort_node_list.c */
 void	sort_node_list(t_list **list, t_ls *flags);

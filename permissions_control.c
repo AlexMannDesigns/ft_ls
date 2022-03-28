@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:50:21 by amann             #+#    #+#             */
-/*   Updated: 2022/03/25 14:09:53 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/28 18:17:32 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,12 @@ static void	add_other_permissions(char *perm_str, mode_t mode)
 		perm_str[8] = 'w';
 	else
 		perm_str[8] = '-';
-	if (mode & S_IXOTH)
+	if ((mode &  S_IXOTH) && !(mode & S_ISVTX))
 		perm_str[9] = 'x';
+	else if ((mode &  S_IXOTH) && (mode & S_ISVTX))
+		perm_str[9] = 't';
+	else if (!(mode &  S_IXOTH) && (mode & S_ISVTX))
+		perm_str[9] = 'T';
 	else
 		perm_str[9] = '-';
 }
