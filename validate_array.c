@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:41:35 by amann             #+#    #+#             */
-/*   Updated: 2022/03/25 18:29:58 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/29 18:14:50 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,19 +119,14 @@ void	validate_arr(char ***arr, t_ls *flags, unsigned int *files_printed)
 	if (fil_count)
 	{
 		files_and_links = set_files_and_links(arr, fil_count, len);
-		if (flags->list)
-		{
-			file_display_control(files_and_links, flags);
-		}
-		//else
-	//		print_basic(files_and_links);
-		//print_files_and_links(files_and_links);
-		//ft_putendl("hello");
+		file_display_control(files_and_links, flags);
 		ft_freearray((void ***)&files_and_links, fil_count);
 		if (dir_count)
 			ft_putchar('\n');
+		else
+			ft_freearray((void ***)arr, fil_count);
 	}
-	if (len > dir_count)
+	if (*arr && len > dir_count)
 	{
 		*files_printed = TRUE;
 		trim_valid_arr(arr, len, dir_count);

@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:10:47 by amann             #+#    #+#             */
-/*   Updated: 2022/03/18 13:03:37 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/29 16:41:55 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ void	initialise_flags(t_ls **flags)
 	(*flags)->reverse = FALSE;
 	(*flags)->all = FALSE;
 	(*flags)->time = FALSE;
+	(*flags)->args_passed = FALSE;
 }

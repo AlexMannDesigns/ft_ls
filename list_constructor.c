@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:50:38 by amann             #+#    #+#             */
-/*   Updated: 2022/03/25 18:35:56 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/29 16:46:37 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,10 @@ static void	populate_file_info(t_file_info **info, char *file_name, char *dir)
 	(*info)->group = stat_data.st_gid;
 	(*info)->modified = stat_data.st_mtime;
 	(*info)->created = stat_data.st_ctime;
-
-
 	(*info)->links = stat_data.st_nlink;
-
 	(*info)->blocks = stat_data.st_blocks;
-
 	(*info)->size = stat_data.st_size;
+	(*info)->attr = listxattr(file_name, buff, LS_BUF_SIZE, XATTR_NOFOLLOW);
 	if ((*info)->type == LNK)
 	{
 		len = readlink(file_path, buff, LS_BUF_SIZE);
@@ -46,7 +43,6 @@ static void	populate_file_info(t_file_info **info, char *file_name, char *dir)
 	}
 	else
 		(*info)->links_to = NULL;
-
 }
 
 static t_file_info	*initialise_file_info(char *file_name, char *dir)
@@ -68,6 +64,7 @@ static t_file_info	*initialise_file_info(char *file_name, char *dir)
 	res->blocks = 0;	
 	res->size = 0;	
 	res->links_to = NULL;	
+	res->attr = 0;
 	populate_file_info(&res, file_name, dir);
 	if (!check_struct_malloc(&res))	
 		return (NULL);
@@ -101,18 +98,29 @@ t_list	*list_constructor(char *dir, t_ls *flags, size_t *len)
 //		*len = 1;
 //		return (file_list);
 //	}
+
+	//ft_printf("%zu\n", len);
 	next_filename = readdir(directory);
 	while (next_filename)
 	{
+//		ft_putendl("here");
 		name = next_filename->d_name;
 		if (!flags->all && name[0] != '.')
+		{
 			list_const_helper(name, dir, &file_list);
-	    else if (flags->all)
+			*len += 1;
+		}
+		else if (flags->all)
+		{
 			list_const_helper(name, dir, &file_list);
-       	next_filename = readdir(directory);		
-		*len += 1;
+			*len += 1;	
+		}
+		next_filename = readdir(directory);		
 	}
-	sort_node_list(&file_list, flags);
+//	ft_printf("%zu\n", *len);
+	if (*len)		
+		sort_node_list(&file_list, flags);
+	
 //	ft_putendl("-------------");
 //	while (file_list)
 //	{

@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:58:39 by amann             #+#    #+#             */
-/*   Updated: 2022/03/25 18:37:45 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/29 13:52:47 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	print_list(t_list *list, size_t list_len, unsigned int print_dir)
 	size_t		i;
 
 	init_fields(&field_width, list, list_len);
-	if (print_dir == TRUE)
+	if (print_dir == TRUE && list)
 		ft_printf("total: %lld\n", field_width.blocks); 
 	head = list;
 	i = 0;

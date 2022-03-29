@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:44:21 by amann             #+#    #+#             */
-/*   Updated: 2022/03/28 17:00:34 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/29 16:21:58 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	file_display_control(char **arr, t_ls *flags)
 	sort_node_list(&list, flags);
 	if (flags->list)
 		print_list(list, i, FALSE);
-//free the node list
+	else
+		print_basic(list);
+	//free the node list
 //the file array is freed in validate_array.c
 }

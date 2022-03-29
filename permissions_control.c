@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:50:21 by amann             #+#    #+#             */
-/*   Updated: 2022/03/28 18:17:32 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/29 16:47:10 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,12 @@ static void	add_other_permissions(char *perm_str, mode_t mode)
 		perm_str[9] = '-';
 }
 
+static void	add_extended_attributes(char *perm_str, t_file_info *file)
+{
+	if (file->attr > 0)
+		perm_str[10] = '@';
+}
+
 void	handle_permissions_and_type(t_file_info *file)
 {
 	char	*perm_str;
@@ -99,6 +105,7 @@ void	handle_permissions_and_type(t_file_info *file)
 	add_user_permissions(perm_str, file->stats.st_mode);
 	add_group_permissions(perm_str, file->stats.st_mode);
 	add_other_permissions(perm_str, file->stats.st_mode);		
+	add_extended_attributes(perm_str, file);
 	ft_printf("%-11s", perm_str);
 	free(perm_str);
 }

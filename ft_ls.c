@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:39:01 by amann             #+#    #+#             */
-/*   Updated: 2022/03/25 17:21:57 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/29 16:38:51 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	display_loop(char **arr, t_ls *flags, unsigned int files_printed)
 	i = 0;
 	while (arr[i])
 	{
-		//ft_printf("%u\n", files_printed);
+	//	ft_printf("hello\n");
 		if (arr[1] || files_printed)
 			ft_printf("%s:\n", arr[i]);
 		display_control(arr[i], flags);
@@ -58,13 +58,14 @@ int	main(int argc, char **argv)
 		return (1);
 	if (*argv)
 	{
-		//ft_putendl(*argv);
+		flags->args_passed = TRUE;
 		file_arr = directory_control(argv, flags, &files_printed);		
-		display_loop(file_arr, flags, files_printed);	
+		if (file_arr)	
+			display_loop(file_arr, flags, files_printed);	
 	}
 	else          		
 		display_control("./", flags);
-//	list_constructor("./", flags);
+
 	if (file_arr)
 		ft_freearray((void ***)&file_arr, check_arr_len((void **)file_arr));
 	free(flags);

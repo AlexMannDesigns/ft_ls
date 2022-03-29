@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/28 13:20:56 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/29 16:41:46 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_ls
 	unsigned int	reverse;
 	unsigned int	all;
 	unsigned int	time;
+	unsigned int	args_passed;
 }					t_ls;
 
 typedef struct s_fields
@@ -83,6 +84,7 @@ typedef struct s_file_info
 	long long int	blocks;
 	long long int	size;
 	char			*links_to;
+	ssize_t			attr;
 }					t_file_info;
 
 /***** FUNCTION PROTOTYPING *****/
@@ -97,7 +99,7 @@ void	initialise_flags(t_ls **flags);
 void	display_control(char *dir_name, t_ls *flag);
 
 /* print_basic.c */
-void	print_basic(char **arr);
+void	print_basic(t_list *lst);
 
 /* print_list.c */
 void	print_list(t_list *list, size_t list_len, unsigned int print_dir);
