@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/29 16:41:46 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/30 16:37:26 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@
 
 # define FLAGS "lRart"
 # define USAGE	"usage: ./ft_ls -[alrRt] [file ...]"
+
+
+//#include <sys/errno.h>
+//extern int errno;
 
 /***** STRUCT PROTOTYPING *****/
 
@@ -136,7 +140,7 @@ void	validate_arr(char ***arr, t_ls *flags, unsigned int *files_printed);
 unsigned int	check_file_type(mode_t st_mode);
 
 /* list_constructor.c */
-t_list	*list_constructor(char *dir, t_ls *flags, size_t *len);
+t_list	*list_constructor(char *dir, t_ls *flags, size_t *len, unsigned int *error);
 void	list_const_helper(char *file_name, char *dir, t_list **file_list);
 
 /* check_malloc.c */
@@ -144,5 +148,8 @@ int		check_struct_malloc(t_file_info **info);
 
 /* file_display_control.c */
 void	file_display_control(char **arr, t_ls *flags);
+
+/* free_info_struct.c */
+void	free_info_struct(void *info, size_t content_size);
 
 #endif

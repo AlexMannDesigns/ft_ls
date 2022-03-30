@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:50:38 by amann             #+#    #+#             */
-/*   Updated: 2022/03/29 16:46:37 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/30 17:56:19 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	populate_file_info(t_file_info **info, char *file_name, char *dir)
 {
 	struct stat	stat_data;
 	char		*file_path;
-	char		buff[LS_BUF_SIZE];
+	char		buff[LS_BUF_SIZE + 1];
 	ssize_t		len;	
 
 	file_path = create_file_path(file_name, dir, TRUE); 
@@ -38,8 +38,10 @@ static void	populate_file_info(t_file_info **info, char *file_name, char *dir)
 	(*info)->attr = listxattr(file_name, buff, LS_BUF_SIZE, XATTR_NOFOLLOW);
 	if ((*info)->type == LNK)
 	{
+		ft_bzero((void *) buff, LS_BUF_SIZE + 1);
 		len = readlink(file_path, buff, LS_BUF_SIZE);
-		(*info)->links_to = ft_strndup(buff, len); 	
+//		ft_printf("%zd\n", len);
+		(*info)->links_to = ft_strndup(buff, len);	
 	}
 	else
 		(*info)->links_to = NULL;
@@ -80,10 +82,10 @@ void	list_const_helper(char *file_name, char *dir, t_list **file_list)
 	if (!temp)
 		return ;
 	ft_lstadd_back(file_list, ft_lstnew((void *)temp, sizeof(t_file_info)));
-
+	free(temp);
 }
 
-t_list	*list_constructor(char *dir, t_ls *flags, size_t *len)
+t_list	*list_constructor(char *dir, t_ls *flags, size_t *len, unsigned int *error)
 {
 	t_list			*file_list;
 	DIR				*directory;
@@ -92,14 +94,13 @@ t_list	*list_constructor(char *dir, t_ls *flags, size_t *len)
 
 	file_list = NULL;	
 	directory = opendir(dir);
-//	if (!directory)
-//	{
-//		list_const_helper(dir, "./", &file_list);
-//		*len = 1;
-//		return (file_list);
-//	}
-
+	if (!directory)
+	{
+		*error = TRUE;
+		return (file_list);
+	}
 	//ft_printf("%zu\n", len);
+//	ft_putendl("hello");
 	next_filename = readdir(directory);
 	while (next_filename)
 	{

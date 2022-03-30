@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 12:29:45 by amann             #+#    #+#             */
-/*   Updated: 2022/03/29 16:20:20 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/30 13:01:59 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	**directory_control(char **argv, t_ls *flags, unsigned int *files_printed)
 	copy_arr(&file_arr, argv);
 	sort_arr(&file_arr, flags, TRUE);
 	validate_arr(&file_arr, flags, files_printed);
-	if (file_arr)	
+	if (*file_arr)	
 		sort_arr(&file_arr, flags, FALSE);
 //	arr_len = check_arr_len((void **)file_arr);
 //	size_t i = 0;

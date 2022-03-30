@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:39:01 by amann             #+#    #+#             */
-/*   Updated: 2022/03/29 16:38:51 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/30 16:49:57 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ int	main(int argc, char **argv)
 		display_control("./", flags);
 
 	if (file_arr)
+	{
 		ft_freearray((void ***)&file_arr, check_arr_len((void **)file_arr));
+	}
 	free(flags);
 	return (0);
 }

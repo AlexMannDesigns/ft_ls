@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:58:39 by amann             #+#    #+#             */
-/*   Updated: 2022/03/29 13:52:47 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/30 17:03:50 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,15 @@ static void	handle_time(t_file_info *current)
 	free(res);
 }
 
+void	free_field_width_struct(t_fields field_width, size_t len)
+{
+	ft_freearray((void ***)&field_width.links_arr, len - 1);
+	ft_freearray((void ***)&field_width.user_arr, len - 1);
+	ft_freearray((void ***)&field_width.group_arr, len - 1);
+	ft_freearray((void ***)&field_width.size_arr, len - 1);
+}
+
+
 void	print_list(t_list *list, size_t list_len, unsigned int print_dir)
 {
 	t_file_info	*current;
@@ -89,5 +98,5 @@ void	print_list(t_list *list, size_t list_len, unsigned int print_dir)
 		i++;
 	}
 	list = head;
-	//free up heap memory pointed to in field_width
+	free_field_width_struct(field_width, i);
 }
