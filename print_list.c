@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:58:39 by amann             #+#    #+#             */
-/*   Updated: 2022/03/30 17:03:50 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/31 15:24:58 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,18 @@ static void	handle_lnk_usr_grp_size(t_fields field_width, size_t i)
 
 static void	handle_time(t_file_info *current)
 {
-	long long int	six_months;
 	time_t			time_now;
 	time_t			time_modded;
 	char			*mod_time;
 	char			*res;
 	char			year[5];
-	
-	//check mod time is within last 6 months
-	six_months = SIX_MONTHS_IN_SECONDS;
+
 	time(&time_now);
 	time_modded = current->modified;
 	mod_time = ctime(&current->modified);
 	res = ft_strsub(mod_time, 4, 12);
-	if (time_now - time_modded < six_months)
-	{	
+	if (time_now - time_modded < SIX_MONTHS_IN_SECONDS)
+	{
 		ft_printf("%13s", res);
 		free(res);
 		return ;
@@ -71,7 +68,6 @@ void	free_field_width_struct(t_fields field_width, size_t len)
 	ft_freearray((void ***)&field_width.size_arr, len - 1);
 }
 
-
 void	print_list(t_list *list, size_t list_len, unsigned int print_dir)
 {
 	t_file_info	*current;
@@ -81,7 +77,7 @@ void	print_list(t_list *list, size_t list_len, unsigned int print_dir)
 
 	init_fields(&field_width, list, list_len);
 	if (print_dir == TRUE && list)
-		ft_printf("total: %lld\n", field_width.blocks); 
+		ft_printf("total: %lld\n", field_width.blocks);
 	head = list;
 	i = 0;
 	while (list)
@@ -90,11 +86,11 @@ void	print_list(t_list *list, size_t list_len, unsigned int print_dir)
 		handle_permissions_and_type(current);
 		handle_lnk_usr_grp_size(field_width, i);
 		handle_time(current);
-		ft_printf(" %s", current->name);	
-    	if (current->type == LNK)
+		ft_printf(" %s", current->name);
+		if (current->type == LNK)
 			ft_printf(" -> %s", current->links_to);
-		ft_putchar('\n');	
-		list = list->next;	
+		ft_putchar('\n');
+		list = list->next;
 		i++;
 	}
 	list = head;

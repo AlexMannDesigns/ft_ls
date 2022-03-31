@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:14:55 by amann             #+#    #+#             */
-/*   Updated: 2022/03/29 16:21:21 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/31 15:25:32 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void	print_basic(t_list *lst)
 		current = (t_file_info *) lst->content;
 		ft_printf("%-*s", col_width, current->name);
 		if (count % col_number == 0)
-				ft_putchar('\n');
+			ft_putchar('\n');
 		lst = lst->next;
 		count++;
 	}
 	lst = head;
-	ft_putchar('\n');	
+	ft_putchar('\n');
 }

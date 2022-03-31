@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_control.c                                    :+:      :+:    :+:   */
+/*   display_control.c                                    :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/03/30 16:43:45 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/31 17:08:24 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_error(char *dir)
 {
-	char 	*res;
+	char	*res;
 	int		len;
 
 	len = ft_strlen(dir);
@@ -31,7 +31,15 @@ static void	display_recursion(t_file_info *current, t_ls *flags)
 	if (!flags->args_passed)
 		ft_printf("./");
 	ft_printf("%s:\n", current->path);
-	display_control(current->path, flags);			
+	display_control(current->path, flags);
+}
+
+static void	display_dispatcher(t_list *file_list, t_ls *flags, size_t len)
+{
+	if (file_list && flags->list)
+		print_list(file_list, len, TRUE);
+	else if (file_list)
+		print_basic(file_list);
 }
 
 void	display_control(char *dir, t_ls *flags)
@@ -46,10 +54,7 @@ void	display_control(char *dir, t_ls *flags)
 	error = FALSE;
 	file_list = list_constructor(dir, flags, &list_len, &error);
 	head = file_list;
-	if (file_list && flags->list)
-		print_list(file_list, list_len, TRUE);
-	else if (file_list)
-		print_basic(file_list);
+	display_dispatcher(file_list, flags, list_len);
 	if (error)
 		print_error(dir);
 	if (flags->recursive)

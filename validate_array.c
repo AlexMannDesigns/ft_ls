@@ -6,54 +6,33 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:41:35 by amann             #+#    #+#             */
-/*   Updated: 2022/03/30 12:08:23 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/31 13:37:38 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-static void	trim_valid_arr(char ***arr, ssize_t len, ssize_t count)
+static void	sfal_helper(char ***arr, char **file_arr, size_t *j, size_t i)
 {
-	char	**new_arr;
-	ssize_t	orig_len;
+	struct stat		stat_data;
+	unsigned int	type;
 
-//	ft_printf("count: %zu  len: %zu\n", count, len);
-	orig_len = len;
-	new_arr = (char **) ft_memalloc(sizeof(char *) * (count + 1));
-	if (!new_arr)
+	stat((*arr)[i], &stat_data);
+	type = check_file_type(stat_data.st_mode);
+	if (type && type != DRC)
 	{
-		ft_freearray((void ***)arr, len);
-		return ;
+		file_arr[*j] = ft_strdup((*arr)[i]);
+		ft_memdel((void **)&((*arr)[i]));
+		(*j)++;
 	}
-	while (len >= 0)
-	{
-//		ft_printf("count: %zu  len: %zu\n", count, len);
-//		ft_putendl((*arr)[len]);
-		if ((*arr)[len])
-		{
-			count--;
-			new_arr[count] = ft_strdup((*arr)[len]);
-			if (!new_arr[count])
-			{
-				ft_freearray((void ***)arr, orig_len);
-				return ;
-			}
-		}
-		len--;
-	}
-	ft_freearray((void ***)arr, orig_len);
-	(*arr) = new_arr;
 }
 
 static char	**set_files_and_links(char ***arr, size_t fil_len, size_t arr_len)
 {
-	char 			**file_arr;
+	char			**file_arr;
 	size_t			i;
 	size_t			j;
-	struct stat		stat_data;
-	unsigned int	type;
 
-	//ft_printf("fil %zu arr %zu\n", fil_len, arr_len);
 	file_arr = (char **) ft_memalloc(sizeof(char *) * (fil_len + 1));
 	if (!file_arr)
 		return (NULL);
@@ -62,36 +41,23 @@ static char	**set_files_and_links(char ***arr, size_t fil_len, size_t arr_len)
 	while (i < arr_len)
 	{
 		if ((*arr)[i])
-		{
-			stat((*arr)[i], &stat_data);
-			type = check_file_type(stat_data.st_mode);
-	   		//ft_printf("type = %u\n", type);
-			if (type && type != DRC)
-			{	
-				file_arr[j] = ft_strdup((*arr)[i]);
-				ft_memdel((void **)&((*arr)[i]));
-			//	ft_printf("file_arr idx %zu = %s\n", j, file_arr[j]);			
-				j++;
-			}
-		}
+			sfal_helper(arr, file_arr, &j, i);
 		i++;
 	}
 	return (file_arr);
 }
 
-static void	validate_arr_loop(char ***arr, ssize_t *len, ssize_t *d_c, size_t *f_c)
+static void	va_loop(char ***arr, ssize_t *len, ssize_t *d_c, size_t *f_c)
 {
 	struct stat		stat_data;
 	unsigned int	type;
 
 	while ((*arr)[*len])
 	{
-//		ft_printf("%zu %s\n", len, (*arr)[len]);
-//		current = opendir((*arr)[len]);
 		if (stat((*arr)[*len], &stat_data))
 		{
 			ft_printf("ft_ls: %s: No such file or directory\n", (*arr)[*len]);
-			ft_memdel((void **)&((*arr)[*len]));	
+			ft_memdel((void **)&((*arr)[*len]));
 		}
 		else
 		{
@@ -99,7 +65,7 @@ static void	validate_arr_loop(char ***arr, ssize_t *len, ssize_t *d_c, size_t *f
 			if (type == DRC)
 				(*d_c)++;
 			else
-				(*f_c)++;	//	ft_putendl((*arr)[len]);	
+				(*f_c)++;
 		}
 		(*len)++;
 	}
@@ -111,11 +77,11 @@ void	validate_arr(char ***arr, t_ls *flags, unsigned int *files_printed)
 	ssize_t			dir_count;
 	size_t			fil_count;
 	char			**files_and_links;
-	
-	len = 0; 
+
+	len = 0;
 	fil_count = 0;
 	dir_count = 0;
-	validate_arr_loop(arr, &len, &dir_count, &fil_count);
+	va_loop(arr, &len, &dir_count, &fil_count);
 	if (fil_count)
 	{
 		files_and_links = set_files_and_links(arr, fil_count, len);
@@ -132,4 +98,3 @@ void	validate_arr(char ***arr, t_ls *flags, unsigned int *files_printed)
 		trim_valid_arr(arr, len, dir_count);
 	}
 }
-

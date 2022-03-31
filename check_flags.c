@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:10:47 by amann             #+#    #+#             */
-/*   Updated: 2022/03/29 16:41:55 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/31 17:13:32 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 static int	flag_control(char *s, t_ls **flags)
 {
 	s++;
-//	ft_printf("%c\n", *s);
 	if (*s == '\0')
 		return (0);
 	if (!ft_strchr(FLAGS, *s))

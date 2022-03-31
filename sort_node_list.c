@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 18:02:23 by amann             #+#    #+#             */
-/*   Updated: 2022/03/29 16:20:11 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/31 15:15:10 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	node_list_swap(t_list **list, t_list **head)
 	*list = *head;
 }
 
-
 void	sort_node_list(t_list **list, t_ls *flags)
 {
 	t_list		*head;
@@ -47,16 +46,16 @@ void	sort_node_list(t_list **list, t_ls *flags)
 	{
 		current = (t_file_info *)(*list)->content;
 		next = (t_file_info *)(*list)->next->content;
-		if (!flags->reverse && !flags->time && ft_strcmp(current->name, next->name) > 0)
+		if (standard_lexico(current, next, flags))
 			node_list_swap(list, &head);
-		else if (flags->reverse && !flags->time && ft_strcmp(current->name, next->name) < 0)
+		else if (reverse_lexico(current, next, flags))
 			node_list_swap(list, &head);
-		else if (!flags->reverse && flags->time && (current->modified < next->modified))
+		else if (standard_time(current, next, flags))
 			node_list_swap(list, &head);
-		else if (flags->reverse && flags->time && (current->modified > next->modified))
+		else if (reverse_time(current, next, flags))
 			node_list_swap(list, &head);
 		else
 			*list = (*list)->next;
 	}
-	*list = head; //reset list pointer to the start
+	*list = head;
 }

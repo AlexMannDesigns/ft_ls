@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/30 16:37:26 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/31 16:15:09 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,12 @@ void	sort_arr(char ***arr, t_ls *flags, unsigned int sanitising);
 /* sort_node_list.c */
 void	sort_node_list(t_list **list, t_ls *flags);
 
+/* sorting_flag_checks.c */
+int		standard_lexico(t_file_info *c, t_file_info *n, t_ls *flags);
+int		reverse_lexico(t_file_info *c, t_file_info *n, t_ls *flags);
+int		standard_time(t_file_info *c, t_file_info *n, t_ls *flags);
+int		reverse_time(t_file_info *c, t_file_info *n, t_ls *flags);
+
 /* directory_control.c */
 char	**directory_control(char **argv, t_ls *flags, unsigned int *files_printed);
 
@@ -136,12 +142,18 @@ size_t	check_arr_len(void **arr);
 /* validate_array.c */
 void	validate_arr(char ***arr, t_ls *flags, unsigned int *files_printed);
 
+/* trim_array.c */
+void	trim_valid_arr(char ***arr, ssize_t len, ssize_t count);
+
 /* check_file_type.c */
 unsigned int	check_file_type(mode_t st_mode);
 
 /* list_constructor.c */
 t_list	*list_constructor(char *dir, t_ls *flags, size_t *len, unsigned int *error);
 void	list_const_helper(char *file_name, char *dir, t_list **file_list);
+
+/* initialise_file_info.c */
+t_file_info	*initialise_file_info(char *file_name, char *dir);
 
 /* check_malloc.c */
 int		check_struct_malloc(t_file_info **info);

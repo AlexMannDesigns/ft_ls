@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:39:01 by amann             #+#    #+#             */
-/*   Updated: 2022/03/30 16:49:57 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/31 16:50:15 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ static void	display_loop(char **arr, t_ls *flags, unsigned int files_printed)
 	i = 0;
 	while (arr[i])
 	{
-	//	ft_printf("hello\n");
 		if (arr[1] || files_printed)
 			ft_printf("%s:\n", arr[i]);
 		display_control(arr[i], flags);
 		if (arr[i + 1])
 			ft_putchar('\n');
-		i++;	
+		i++;
 	}
 }
 
@@ -43,6 +42,7 @@ int	main(int argc, char **argv)
 //    printf ("lines %d\n", w.ws_row);
 //    printf ("columns %d\n", w.ws_col);
 	flags = NULL;
+	file_arr = NULL;
 	files_printed = FALSE;
 	initialise_flags(&flags);
 	if (!flags)
@@ -53,23 +53,19 @@ int	main(int argc, char **argv)
 		free(flags);
 		return (0);
 	}
-	file_arr = NULL;
 	if (!option_control(&argv, &flags))
 		return (1);
 	if (*argv)
 	{
 		flags->args_passed = TRUE;
-		file_arr = directory_control(argv, flags, &files_printed);		
-		if (file_arr)	
-			display_loop(file_arr, flags, files_printed);	
+		file_arr = directory_control(argv, flags, &files_printed);
+		if (file_arr)
+			display_loop(file_arr, flags, files_printed);
 	}
-	else          		
+	else
 		display_control("./", flags);
-
 	if (file_arr)
-	{
 		ft_freearray((void ***)&file_arr, check_arr_len((void **)file_arr));
-	}
 	free(flags);
 	return (0);
 }
