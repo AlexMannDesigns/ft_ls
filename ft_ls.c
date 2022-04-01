@@ -6,14 +6,12 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:39:01 by amann             #+#    #+#             */
-/*   Updated: 2022/03/31 16:50:15 by amann            ###   ########.fr       */
+/*   Updated: 2022/03/31 17:28:54 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-//#include <sys/ioctl.h>
-//ft_printf("ft_ls: %s: No such file or directory\n", argv[i]);
 
 static void	display_loop(char **arr, t_ls *flags, unsigned int files_printed)
 {
@@ -36,11 +34,7 @@ int	main(int argc, char **argv)
 	t_ls			*flags;
 	char			**file_arr;
 	unsigned int	files_printed;
-//	struct winsize w;
-//    ioctl(0, TIOCGWINSZ, &w);
-//
-//    printf ("lines %d\n", w.ws_row);
-//    printf ("columns %d\n", w.ws_col);
+	
 	flags = NULL;
 	file_arr = NULL;
 	files_printed = FALSE;

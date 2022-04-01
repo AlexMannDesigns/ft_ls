@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/03/31 17:08:24 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/01 13:00:27 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	display_dispatcher(t_list *file_list, t_ls *flags, size_t len)
 	if (file_list && flags->list)
 		print_list(file_list, len, TRUE);
 	else if (file_list)
-		print_basic(file_list);
+		print_basic(file_list, len);
 }
 
 void	display_control(char *dir, t_ls *flags)

@@ -6,13 +6,13 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 12:19:47 by amann             #+#    #+#             */
-/*   Updated: 2022/03/20 16:14:12 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/01 16:48:02 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-unsigned int	check_file_type(mode_t st_mode)
+int	check_file_type(mode_t st_mode)
 {
 	if (S_ISREG(st_mode))
 		return (RGF);

@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:44:21 by amann             #+#    #+#             */
-/*   Updated: 2022/03/31 17:00:24 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/01 13:01:34 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void	file_display_control(char **arr, t_ls *flags)
 	if (flags->list)
 		print_list(list, i, FALSE);
 	else
-		print_basic(list);
+		print_basic(list, i);
 	ft_lstdel(&head, &free_info_struct);
 }

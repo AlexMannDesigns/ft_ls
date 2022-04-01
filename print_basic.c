@@ -6,61 +6,71 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:14:55 by amann             #+#    #+#             */
-/*   Updated: 2022/03/31 15:25:32 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/01 16:48:39 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-static size_t	set_col_width(t_list *lst)
+static void	print_object(t_list *lst, size_t *len, size_t col_width)
 {
 	t_file_info	*current;
-	size_t		max;
-	size_t		current_len;
-	t_list		*head;
 
-	max = 0;
-	head = lst;
-	while (lst)
+	current = (t_file_info *) lst->content;
+	ft_printf("%-*s", col_width, current->name);
+	(*len)--;
+}
+
+static void	print_nl(t_list **lst, t_list *head, size_t *col, size_t *row)
+{
+	size_t			j;
+
+	ft_putchar('\n');
+	*lst = head;
+	*col = 0;
+	j = 0;
+	while (j < *row)
 	{
-		current = (t_file_info *) lst->content;
-		current_len = ft_strlen(current->name);
-		if (current_len > max)
-			max = current_len;
-		lst = lst->next;
+		*lst = (*lst)->next;
+		j++;
 	}
-	lst = head;
-	return (max);
+	(*row)++;
 }
 
-static size_t	set_col_number(size_t col_width)
+static void	next_object(t_list **lst, size_t col_height)
 {
-	if (col_width > 50)
-		return (1);
-	else
-		return (5);
+	size_t	i;
+
+	i = 0;
+	while (i < col_height && *lst)
+	{
+		*lst = (*lst)->next;
+		i++;
+	}
 }
 
-void	print_basic(t_list *lst)
+void	print_basic(t_list *lst, size_t len)
 {
 	t_list		*head;
-	t_file_info	*current;
-	size_t		count;
-	size_t		col_width;
-	size_t		col_number;
+	t_columns	col_data;
+	size_t		row;
+	size_t		col;
 
-	col_width = set_col_width(lst) + 1;
-	col_number = set_col_number(col_width);
-	count = 1;
+	col_data.col_width = set_col_width(lst) + 2;
+	col_data.col_number = set_col_number(col_data.col_width);
+	col_data.col_height = set_col_height(col_data.col_number, len);
+	col = 1;
 	head = lst;
-	while (lst)
+	row = 1;
+	while (len)
 	{
-		current = (t_file_info *) lst->content;
-		ft_printf("%-*s", col_width, current->name);
-		if (count % col_number == 0)
-			ft_putchar('\n');
-		lst = lst->next;
-		count++;
+		if (lst)
+			print_object(lst, &len, col_data.col_width);
+		if (col % col_data.col_number == 0)
+			print_nl(&lst, head, &col, &row);
+		else
+			next_object(&lst, col_data.col_height);
+		col++;
 	}
 	lst = head;
 	ft_putchar('\n');
