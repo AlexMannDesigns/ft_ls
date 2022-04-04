@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:44:21 by amann             #+#    #+#             */
-/*   Updated: 2022/04/01 17:50:15 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/04 17:51:26 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ void	file_display_control(char **arr, t_ls *flags)
 	}
 	sort_node_list(&list, flags);
 	head = list;
-	if (flags->list)
-		print_list(list, i, FALSE);
-	else
-		print_basic(list, i);
+	display_dispatcher(list, flags, i);
+//	if (flags->list)
+//		print_list(list, i, FALSE);
+//	else
+//		print_basic(list, i);
 	ft_lstdel(&head, &free_info_struct);
 }

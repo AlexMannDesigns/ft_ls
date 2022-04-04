@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/04/01 16:48:50 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/04 18:28:55 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@
 # define CHR 5
 # define FFO 6
 
-# define FLAGS "lRart"
-# define USAGE	"usage: ./ft_ls -[alrRt] [file ...]"
+# define FLAGS "Ralmnrt1"
+# define USAGE	"usage: ./ft_ls [-Ralmnrt1] [file ...]"
 
 /***** STRUCT PROTOTYPING *****/
 
@@ -54,6 +54,9 @@ typedef struct s_ls
 	unsigned int	reverse;
 	unsigned int	all;
 	unsigned int	time;
+	unsigned int	one;
+	unsigned int	comma;
+	unsigned int	group_no;
 	unsigned int	args_passed;
 }					t_ls;
 
@@ -103,6 +106,7 @@ void		initialise_flags(t_ls **flags);
 
 /* display_control.c */
 void		display_control(char *dir_name, t_ls *flag);
+void		display_dispatcher(t_list *file_list, t_ls *flags, size_t len);
 
 /* print_basic.c */
 void		print_basic(t_list *lst, size_t len);
@@ -113,18 +117,20 @@ size_t		set_col_number(size_t col_width);
 size_t		set_col_height(size_t col_number, size_t len);
 
 /* print_list.c */
-void		print_list(t_list *list, size_t list_len, unsigned int print_dir);
+void		print_list(t_list *list, size_t list_len, unsigned int print_dir, t_ls *flags);
 char		*create_file_path(char *name, char *path, unsigned int list);
+
+/* print_other.c */
+void		print_other(t_list *lst, char type);
 
 /* permissions_control.c */
 void		handle_permissions_and_type(t_file_info *file);
 
 /* initialise_fields.c */
-void		init_fields(t_fields *f_width, t_list *list, size_t len);
+void		init_fields(t_fields *f_width, t_list *list, size_t len, t_ls *flags);
 
 /* init_fields_loop.c */
-void		init_fields_loop(t_list *list, t_fields *f_width, size_t *w_arr, \
-			size_t i);
+void		init_fields_loop(t_list *list, t_fields *f_width, t_ls *flg, size_t *w_a);
 
 /* user_and_grooup.c */
 char		*username(uid_t st_uid);

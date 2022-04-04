@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:10:47 by amann             #+#    #+#             */
-/*   Updated: 2022/03/31 17:13:32 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/04 16:56:13 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@
  * usage displayed if invalid flag parsed
 */
 
-static int	flag_control(char *s, t_ls **flags)
+static int	flag_control(char *s, char *error, t_ls **flags)
 {
 	s++;
 	if (*s == '\0')
 		return (0);
 	if (!ft_strchr(FLAGS, *s))
+	{
+		*error = *s;
 		return (1);
+	}
 	if (*s == 'l')
 		(*flags)->list = TRUE;
 	else if (*s == 'R')
@@ -35,11 +38,19 @@ static int	flag_control(char *s, t_ls **flags)
 		(*flags)->all = TRUE;
 	else if (*s == 't')
 		(*flags)->time = TRUE;
-	return (flag_control(s, flags));
+	else if (*s == '1')
+		(*flags)->one = TRUE;
+	else if (*s == 'm')
+		(*flags)->comma = TRUE;
+	else if (*s == 'n')
+		(*flags)->group_no = TRUE;
+	return (flag_control(s, error, flags));
 }
 
 int	option_control(char ***argv, t_ls **flags)
 {
+	char error;
+
 	(*argv)++;
 	while (**argv)
 	{
@@ -47,9 +58,9 @@ int	option_control(char ***argv, t_ls **flags)
 		{
 			if ((**argv)[1] == '\0')
 				break ;
-			if (flag_control(**argv, flags))
+			if (flag_control(**argv, &error, flags))
 			{	
-				ft_printf("%s\n", USAGE);
+				ft_printf("ft_ls: illegal option -- %c\n%s\n", error, USAGE);
 				return (0);
 			}
 		}
@@ -70,5 +81,8 @@ void	initialise_flags(t_ls **flags)
 	(*flags)->reverse = FALSE;
 	(*flags)->all = FALSE;
 	(*flags)->time = FALSE;
+	(*flags)->one = FALSE;
+	(*flags)->comma = FALSE;
+	(*flags)->group_no = FALSE;
 	(*flags)->args_passed = FALSE;
 }

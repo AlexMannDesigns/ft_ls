@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:58:39 by amann             #+#    #+#             */
-/*   Updated: 2022/03/31 15:24:58 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/04 18:18:23 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ void	free_field_width_struct(t_fields field_width, size_t len)
 	ft_freearray((void ***)&field_width.size_arr, len - 1);
 }
 
-void	print_list(t_list *list, size_t list_len, unsigned int print_dir)
+void	print_list(t_list *list, size_t list_len, unsigned int print_dir, t_ls *flags)
 {
 	t_file_info	*current;
 	t_fields	field_width;
 	t_list		*head;
 	size_t		i;
 
-	init_fields(&field_width, list, list_len);
+	init_fields(&field_width, list, list_len, flags);
 	if (print_dir == TRUE && list)
 		ft_printf("total: %lld\n", field_width.blocks);
 	head = list;
