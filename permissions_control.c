@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 11:50:21 by amann             #+#    #+#             */
-/*   Updated: 2022/03/31 15:38:12 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/05 18:42:56 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ static void	add_other_permissions(char *perm_str, t_file_info *file)
 		perm_str[9] = 'T';
 	else
 		perm_str[9] = '-';
-	if (file->attr > 0)
-		perm_str[10] = '@';
+	extended_attr_and_acl(perm_str, file);
 }
 
 void	handle_permissions_and_type(t_file_info *file)

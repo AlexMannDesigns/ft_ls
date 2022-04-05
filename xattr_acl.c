@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_display_control.c                             :+:      :+:    :+:   */
+/*   xattr_acl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 17:44:21 by amann             #+#    #+#             */
-/*   Updated: 2022/04/05 13:21:21 by amann            ###   ########.fr       */
+/*   Created: 2022/04/05 18:22:13 by amann             #+#    #+#             */
+/*   Updated: 2022/04/05 18:23:20 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void	file_display_control(char **arr, t_ls *flags)
+void	extended_attr_and_acl(char *perm_str, t_file_info *file)
 {
-	t_list	*list;
-	t_list	*head;
-	size_t	i;
+	acl_t	acl;
 
-	sort_arr(&arr, flags, FALSE);
-	list = NULL;
-	i = 0;
-	while (arr[i])
-	{
-		list_const_helper(arr[i], "./", &list);
-		i++;
+	acl = acl_get_file(file->path, ACL_TYPE_EXTENDED);
+	if (acl)
+	{	
+		perm_str[10] = '+';
+		acl_free(acl);
 	}
-	sort_node_list(&list, flags);
-	head = list;
-	display_dispatcher(list, flags, i);
-	ft_lstdel(&head, &free_info_struct);
+	if (file->attr > 0)
+		perm_str[10] = '@';
 }

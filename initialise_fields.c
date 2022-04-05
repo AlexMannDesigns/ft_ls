@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 12:27:08 by amann             #+#    #+#             */
-/*   Updated: 2022/04/04 18:20:43 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/05 18:48:58 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static void	max_width(t_fields *f_width, size_t *w_arr, size_t col, size_t len)
 	if (col == 0)
 		f_width->links = max;
 	if (col == 1)
-		f_width->user = max;
+		f_width->user = max + 1;
 	if (col == 2)
-		f_width->group = max + 1;
+		f_width->group = max;
 	if (col == 3)
-		f_width->size = max + 1;
+		f_width->size = max;
 }
 
 void	init_fields(t_fields *f_width, t_list *list, size_t len, t_ls *flags)

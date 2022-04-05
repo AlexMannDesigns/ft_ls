@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:58:39 by amann             #+#    #+#             */
-/*   Updated: 2022/04/04 18:18:23 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/05 18:45:18 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ char	*create_file_path(char *name, char *path, unsigned int list)
 
 static void	handle_lnk_usr_grp_size(t_fields field_width, size_t i)
 {
-	ft_printf("%*s", field_width.links, (field_width.links_arr)[i]);
-	ft_printf("%*s", field_width.user, (field_width.user_arr)[i]);
-	ft_printf("%*s", field_width.group, (field_width.group_arr)[i]);
+	ft_printf("%*s ", field_width.links, (field_width.links_arr)[i]);
+	ft_printf("%-*s", field_width.user, (field_width.user_arr)[i]);
+	ft_printf("%-*s", field_width.group, (field_width.group_arr)[i]);
 	ft_printf("%*s", field_width.size, (field_width.size_arr)[i]);
 }
 
@@ -68,21 +68,21 @@ void	free_field_width_struct(t_fields field_width, size_t len)
 	ft_freearray((void ***)&field_width.size_arr, len - 1);
 }
 
-void	print_list(t_list *list, size_t list_len, unsigned int print_dir, t_ls *flags)
+void	print_list(t_list *lst, size_t lst_len, unsigned int prnt_d, t_ls *flg)
 {
 	t_file_info	*current;
 	t_fields	field_width;
 	t_list		*head;
 	size_t		i;
 
-	init_fields(&field_width, list, list_len, flags);
-	if (print_dir == TRUE && list)
+	init_fields(&field_width, lst, lst_len, flg);
+	if (prnt_d == TRUE && lst)
 		ft_printf("total: %lld\n", field_width.blocks);
-	head = list;
+	head = lst;
 	i = 0;
-	while (list)
+	while (lst)
 	{
-		current = (t_file_info *)list->content;
+		current = (t_file_info *)lst->content;
 		handle_permissions_and_type(current);
 		handle_lnk_usr_grp_size(field_width, i);
 		handle_time(current);
@@ -90,9 +90,9 @@ void	print_list(t_list *list, size_t list_len, unsigned int print_dir, t_ls *fla
 		if (current->type == LNK)
 			ft_printf(" -> %s", current->links_to);
 		ft_putchar('\n');
-		list = list->next;
+		lst = lst->next;
 		i++;
 	}
-	list = head;
+	lst = head;
 	free_field_width_struct(field_width, i);
 }

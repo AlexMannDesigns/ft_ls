@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/04/04 18:28:55 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/05 18:24:18 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # include <uuid/uuid.h>
 # include <time.h>
 # include <stdio.h>
+# include <sys/types.h>
+# include <sys/acl.h>
+
 
 /***** MACROS *****/
 
@@ -117,7 +120,8 @@ size_t		set_col_number(size_t col_width);
 size_t		set_col_height(size_t col_number, size_t len);
 
 /* print_list.c */
-void		print_list(t_list *list, size_t list_len, unsigned int print_dir, t_ls *flags);
+void		print_list(t_list *list, size_t list_len, unsigned int print_dir, \
+			t_ls *flags);
 char		*create_file_path(char *name, char *path, unsigned int list);
 
 /* print_other.c */
@@ -126,11 +130,16 @@ void		print_other(t_list *lst, char type);
 /* permissions_control.c */
 void		handle_permissions_and_type(t_file_info *file);
 
+/* xattr_acl.c */
+void		extended_attr_and_acl(char *perm_str, t_file_info *file);
+
 /* initialise_fields.c */
-void		init_fields(t_fields *f_width, t_list *list, size_t len, t_ls *flags);
+void		init_fields(t_fields *f_width, t_list *list, size_t len, \
+			t_ls *flags);
 
 /* init_fields_loop.c */
-void		init_fields_loop(t_list *list, t_fields *f_width, t_ls *flg, size_t *w_a);
+void		init_fields_loop(t_list *list, t_fields *f_width, t_ls *flg, \
+			size_t *w_a);
 
 /* user_and_grooup.c */
 char		*username(uid_t st_uid);

@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:14:55 by amann             #+#    #+#             */
-/*   Updated: 2022/04/04 18:12:47 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/05 14:03:57 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,11 @@ void	print_basic(t_list *lst, size_t len)
 	{
 		if (lst)
 			print_object(lst, &len, col_data.col_width);
-		if (col % col_data.col_number == 0)
+		if (col % col_data.col_number == 0 || len == 0)
 			print_nl(&lst, head, &col, &row);
 		else
 			next_object(&lst, col_data.col_height);
 		col++;
 	}
 	lst = head;
-	ft_putchar('\n');
 }

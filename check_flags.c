@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:10:47 by amann             #+#    #+#             */
-/*   Updated: 2022/04/04 16:56:13 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/05 13:34:47 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ static int	flag_control(char *s, char *error, t_ls **flags)
 		*error = *s;
 		return (1);
 	}
-	if (*s == 'l')
+	if (*s == 'l' || *s == 'n')
 		(*flags)->list = TRUE;
+	if (*s == 'n')
+		(*flags)->group_no = TRUE;
 	else if (*s == 'R')
 		(*flags)->recursive = TRUE;
 	else if (*s == 'r')
@@ -42,14 +44,12 @@ static int	flag_control(char *s, char *error, t_ls **flags)
 		(*flags)->one = TRUE;
 	else if (*s == 'm')
 		(*flags)->comma = TRUE;
-	else if (*s == 'n')
-		(*flags)->group_no = TRUE;
 	return (flag_control(s, error, flags));
 }
 
 int	option_control(char ***argv, t_ls **flags)
 {
-	char error;
+	char	error;
 
 	(*argv)++;
 	while (**argv)

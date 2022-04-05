@@ -6,7 +6,7 @@
 #    By: amann <amann@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 17:55:31 by amann             #+#    #+#              #
-#    Updated: 2022/04/04 16:44:21 by amann            ###   ########.fr        #
+#    Updated: 2022/04/05 18:24:47 by amann            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS = ft_ls.c check_flags.c display_control.c sort_array.c print_basic.c			\
 	   permissions_control.c initialise_fields.c list_constructor.c check_malloc.c	\
 	   sort_node_list.c	file_display_control.c init_fields_loop.c user_and_group.c	\
 	   free_info_struct.c trim_array.c sorting_flag_checks.c initialise_file_info.c	\
-	   column_data.c print_other.c
+	   column_data.c print_other.c xattr_acl.c
 HEADER = -I includes/ft_ls.h
 OBJ = $(SRCS:.c=.o)
 LIB_DIR = libft/

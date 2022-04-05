@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:11:07 by amann             #+#    #+#             */
-/*   Updated: 2022/03/31 16:38:30 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/05 17:07:05 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	populate_file_info(t_file_info **info, char *file_name, char *dir)
 	(*info)->links = stat_data.st_nlink;
 	(*info)->blocks = stat_data.st_blocks;
 	(*info)->size = stat_data.st_size;
-	(*info)->attr = listxattr(file_name, buff, LS_BUF_SIZE, XATTR_NOFOLLOW);
+	(*info)->attr = listxattr(file_path, buff, LS_BUF_SIZE, XATTR_NOFOLLOW);
 	populate_link_info(info, file_path);
 }
 
