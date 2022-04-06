@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:10:47 by amann             #+#    #+#             */
-/*   Updated: 2022/04/05 13:34:47 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/06 13:26:01 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ int	option_control(char ***argv, t_ls **flags)
 		{
 			if ((**argv)[1] == '\0')
 				break ;
+			if ((**argv)[1] == '-' && (**argv)[2] != '-')
+			{
+				(*argv)++;
+				break ;
+			}	
 			if (flag_control(**argv, &error, flags))
 			{	
 				ft_printf("ft_ls: illegal option -- %c\n%s\n", error, USAGE);
