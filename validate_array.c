@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 15:41:35 by amann             #+#    #+#             */
-/*   Updated: 2022/04/04 17:47:24 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/07 17:37:49 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	validate_arr(char ***arr, t_ls *flags, unsigned int *files_printed)
 		else
 			ft_freearray((void ***)arr, fil_count);
 	}
-	if (*arr && len > dir_count)
+	if (dir_count && len > dir_count)
 	{
 		*files_printed = TRUE;
 		trim_valid_arr(arr, len, dir_count);

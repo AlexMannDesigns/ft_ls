@@ -6,7 +6,7 @@
 #    By: amann <amann@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 17:55:31 by amann             #+#    #+#              #
-#    Updated: 2022/04/05 18:24:47 by amann            ###   ########.fr        #
+#    Updated: 2022/04/07 17:18:30 by amann            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,10 +50,7 @@ test:
 	@gcc -o $(NAME) $(OBJ) $(HEADER) -L $(LIB_DIR) -lft
 
 leak_test:
-#	@$(MAKE) -C $(LIB_DIR) leak_test
-#	@gcc $(LEAK_TEST) $(FLAGS) $(HEADER) -c $(SRCS)
 	gcc -o $(NAME) $(HEADER) $(SRCS) $(LIB_DIR)srcs/*.c $(LIB_DIR)ft_printf/*.c $(LEAK_TEST) 
-#	@$(MAKE) -C $(LIB_DIR) test_clean
 
 tclean:
 	@/bin/rm -rf $(NAME).dSYM
@@ -61,5 +58,5 @@ tclean:
 
 tre: tclean test
 
-.PHONY: all clean re fclean test tclean tre test_leaks libft_make
+.PHONY: all clean re fclean test tclean tre leak_test libft_make
 
