@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:02:11 by amann             #+#    #+#             */
-/*   Updated: 2022/04/05 13:33:22 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/14 10:55:42 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ void	init_fields_loop(t_list *list, t_fields *width, t_ls *flg, size_t *w_a)
 			w_a[j] = get_username(width, n, j, flg);
 		if (i == 2)
 			w_a[j] = get_grp_id(width, n, j, flg);
-		if (i == 3)
+		if (i == 3 && n->type != BLK && n->type != CHR)
 			w_a[j] = get_size(width, n, j);
+		else if (i == 3 && (n->type == BLK || n->type == CHR))
+			w_a[j] = 10;
 		list = list->next;
 		j++;
 	}
