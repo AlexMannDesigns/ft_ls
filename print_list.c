@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:58:39 by amann             #+#    #+#             */
-/*   Updated: 2022/04/14 11:39:12 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/14 13:34:51 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ static void	handle_time(t_file_info *current)
 	time_modded = current->modified;
 	mod_time = ctime(&current->modified);
 	res = ft_strsub(mod_time, 4, 12);
-	if (time_now - time_modded < SIX_MONTHS_IN_SECONDS)
+	if (time_now - time_modded < SIX_MONTHS_IN_SECONDS
+		&& time_now >= time_modded)
 	{
 		ft_printf("%13s", res);
 		free(res);
