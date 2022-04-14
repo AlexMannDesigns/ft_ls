@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/04/14 13:36:01 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/14 14:17:23 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ static void	print_error(char *dir)
 
 static void	display_recursion(t_file_info *current, t_ls *flags)
 {
+	if (ft_strcmp(current->name, ".") == 0
+		|| ft_strcmp(current->name, "..") == 0)
+		return ;
 	ft_putchar('\n');
 	if (!flags->args_passed)
 		ft_printf("./");
-	if ((current->path)[0] == '/' && (current->path)[1] == '/')
+	if ((current->path)[0] == '/' && (current->path)[1] == '/'
+		&& (current->path)[2] != '/')
 		ft_printf("%s:\n", (current->path) + 1);
 	else
 		ft_printf("%s:\n", current->path);
