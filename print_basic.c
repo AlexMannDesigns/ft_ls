@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 18:14:55 by amann             #+#    #+#             */
-/*   Updated: 2022/04/08 18:05:32 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/14 11:38:03 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	print_basic(t_list *lst, size_t len)
 
 	col_data.col_width = set_col_width(lst) + 2;
 	col_data.col_number = set_col_number(col_data.col_width);
-//	ft_printf("%d %d\n", col_data.col_number, len);
 	col_data.col_height = set_col_height(col_data.col_number, len);
 	col = 1;
 	head = lst;

@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:19:47 by amann             #+#    #+#             */
-/*   Updated: 2022/04/08 18:04:40 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/14 11:36:29 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ size_t	set_col_number(size_t col_width)
 {
 	struct winsize	w;
 	size_t			res;
+
 	ioctl(0, TIOCGWINSZ, &w);
-	
 	res = w.ws_col / col_width;
 	if (res > 1)
 		return (res);

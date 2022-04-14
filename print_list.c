@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:58:39 by amann             #+#    #+#             */
-/*   Updated: 2022/04/14 10:58:43 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/14 11:39:12 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*create_file_path(char *name, char *path, unsigned int list)
 static void	lnk_usr_grp_sz(t_fields f_width, size_t i, t_file_info *current)
 {
 	int	maj;
-	int min;
+	int	min;
 
 	ft_printf("%*s ", f_width.links, (f_width.links_arr)[i]);
 	ft_printf("%-*s", f_width.user, (f_width.user_arr)[i]);
@@ -41,7 +41,7 @@ static void	lnk_usr_grp_sz(t_fields f_width, size_t i, t_file_info *current)
 		maj = major(current->stats.st_rdev);
 		min = minor(current->stats.st_rdev);
 		if (min > 500)
-			ft_printf("%4d, %0#10x",  maj, min);
+			ft_printf("%4d, %0#10x", maj, min);
 		else
 			ft_printf("%4d, %3d", maj, min);
 	}

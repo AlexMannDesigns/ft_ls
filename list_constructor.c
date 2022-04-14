@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 11:50:38 by amann             #+#    #+#             */
-/*   Updated: 2022/04/08 17:55:10 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/14 11:37:35 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static t_list	*lc_loop(DIR *directory, size_t *l, char *dir, t_ls *flg)
 	t_list			*file_list;
 
 	file_list = NULL;
-	int i = 0;
 	next_filename = readdir(directory);
 	while (next_filename)
 	{
@@ -46,7 +45,6 @@ static t_list	*lc_loop(DIR *directory, size_t *l, char *dir, t_ls *flg)
 			*l += 1;
 		}
 		next_filename = readdir(directory);
-		i++;	
 	}
 	return (file_list);
 }
