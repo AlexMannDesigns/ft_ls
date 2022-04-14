@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:10:47 by amann             #+#    #+#             */
-/*   Updated: 2022/04/07 17:55:50 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/14 15:47:33 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,38 @@
  * usage displayed if invalid flag parsed
 */
 
+static void	reset_display(char c, t_ls **flags)
+{
+	if (c == 'l' || c == 'n')
+	{
+		(*flags)->one = FALSE;
+		(*flags)->comma = FALSE;
+	}
+	if (c == '1')
+	{
+		(*flags)->list = FALSE;
+		(*flags)->comma = FALSE;
+	}
+	if (c == 'm')
+	{
+		(*flags)->list = FALSE;
+		(*flags)->one = FALSE;
+	}
+}
+
+static void	set_display(char *s, t_ls **flags)
+{
+	if (*s == 'l' || *s == 'n')
+		(*flags)->list = TRUE;
+	if (*s == 'n')
+		(*flags)->group_no = TRUE;
+	else if (*s == '1')
+		(*flags)->one = TRUE;
+	else if (*s == 'm')
+		(*flags)->comma = TRUE;
+	reset_display(*s, flags);
+}
+
 static int	flag_control(char *s, char *error, t_ls **flags)
 {
 	s++;
@@ -28,10 +60,8 @@ static int	flag_control(char *s, char *error, t_ls **flags)
 		*error = *s;
 		return (1);
 	}
-	if (*s == 'l' || *s == 'n')
-		(*flags)->list = TRUE;
-	if (*s == 'n')
-		(*flags)->group_no = TRUE;
+	if (*s == 'l' || *s == 'n' || *s == '1' || *s == 'm')
+		set_display(s, flags);
 	else if (*s == 'R')
 		(*flags)->recursive = TRUE;
 	else if (*s == 'r')
@@ -40,10 +70,6 @@ static int	flag_control(char *s, char *error, t_ls **flags)
 		(*flags)->all = TRUE;
 	else if (*s == 't')
 		(*flags)->time = TRUE;
-	else if (*s == '1')
-		(*flags)->one = TRUE;
-	else if (*s == 'm')
-		(*flags)->comma = TRUE;
 	return (flag_control(s, error, flags));
 }
 
