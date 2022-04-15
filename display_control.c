@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:18:06 by amann             #+#    #+#             */
-/*   Updated: 2022/04/14 14:17:23 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/15 12:18:34 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ static void	display_recursion(t_file_info *current, t_ls *flags)
 	display_control(current->path, flags);
 }
 
-void	display_dispatcher(t_list *file_list, t_ls *flags, size_t len)
+void	display_dispatcher(t_list *file_list, t_ls *flags, size_t len, \
+		unsigned int files)
 {
 	if (file_list && flags->list)
-		print_list(file_list, len, TRUE, flags);
+		print_list(file_list, len, files, flags);
 	else if (file_list && flags->one)
 		print_other(file_list, '\n');
 	else if (file_list && flags->comma)
@@ -65,7 +66,7 @@ void	display_control(char *dir, t_ls *flags)
 	error = FALSE;
 	file_list = list_constructor(dir, flags, &list_len, &error);
 	head = file_list;
-	display_dispatcher(file_list, flags, list_len);
+	display_dispatcher(file_list, flags, list_len, FALSE);
 	if (error)
 		print_error(dir);
 	if (flags->recursive)
