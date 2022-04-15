@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:05:57 by amann             #+#    #+#             */
-/*   Updated: 2022/03/28 13:08:51 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/15 15:44:36 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*username(uid_t st_uid)
 	pwd = getpwuid(st_uid);
 	if (pwd)
 		return (pwd->pw_name);
-	return ("Unkown");
+	return (NULL);
 }
 
 char	*group_id(gid_t grp_id)
@@ -29,5 +29,5 @@ char	*group_id(gid_t grp_id)
 	grp = getgrgid(grp_id);
 	if (grp)
 		return (grp->gr_name);
-	return ("Unknown");
+	return (NULL);
 }

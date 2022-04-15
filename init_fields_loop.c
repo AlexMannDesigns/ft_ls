@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:02:11 by amann             #+#    #+#             */
-/*   Updated: 2022/04/14 12:39:12 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/15 15:46:21 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,35 @@ static size_t	get_links(t_fields *width, t_file_info *n, size_t j)
 
 static size_t	get_username(t_fields *w, t_file_info *n, size_t j, t_ls *flg)
 {
+	char	*name;
+
 	if (flg->group_no)
 		(w->user_arr)[j] = ft_itoa(n->user);
 	else
-		(w->user_arr)[j] = ft_strdup(username(n->user));
+	{
+		name = username(n->user);
+		if (name)
+			(w->user_arr)[j] = ft_strdup(name);
+		else
+			(w->user_arr)[j] = ft_itoa(n->user);
+	}
 	return (ft_strlen((w->user_arr)[j]));
 }
 
 static size_t	get_grp_id(t_fields *w, t_file_info *n, size_t j, t_ls *flg)
 {
+	char	*name;
+
 	if (flg->group_no)
 		(w->group_arr)[j] = ft_itoa(n->group);
 	else
-		(w->group_arr)[j] = ft_strdup(group_id(n->group));
+	{
+		name = group_id(n->group);
+		if (name)
+			(w->group_arr)[j] = ft_strdup(name);
+		else
+			(w->group_arr)[j] = ft_itoa(n->group);
+	}
 	return (ft_strlen((w->group_arr)[j]));
 }
 

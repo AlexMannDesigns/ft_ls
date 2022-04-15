@@ -6,7 +6,7 @@
 /*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/04/15 12:01:36 by amann            ###   ########.fr       */
+/*   Updated: 2022/04/15 15:13:30 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,6 @@ int			reverse_time(t_file_info *c, t_file_info *n, t_ls *flags);
 /* directory_control.c */
 char		**directory_control(char **argv, t_ls *flags, \
 			unsigned int *files_printed);
-
 size_t		check_arr_len(void **arr);
 
 /* validate_array.c */
