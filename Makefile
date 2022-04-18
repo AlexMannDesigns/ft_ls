@@ -6,7 +6,7 @@
 #    By: amann <amann@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 17:55:31 by amann             #+#    #+#              #
-#    Updated: 2022/04/07 17:18:30 by amann            ###   ########.fr        #
+#    Updated: 2022/04/18 17:31:33 by amann            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,11 @@ LEAK_TEST = -fsanitize=address -g
 #rules
 all: $(NAME)
 
-$(NAME): libft_make
-	@gcc $(FLAGS) $(HEADER) -c $(SRCS)
+$(NAME): libft_make $(SRCS) $(OBJ) 
 	@gcc -o $(NAME) $(OBJ) $(HEADER) -L $(LIB_DIR) -lft
+
+%.o: %.c
+	@gcc $(FLAGS) $(HEADER) -c $< -o $@
 
 libft_make:
 	@$(MAKE) -C $(LIB_DIR)
