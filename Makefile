@@ -6,13 +6,13 @@
 #    By: amann <amann@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 17:55:31 by amann             #+#    #+#              #
-#    Updated: 2022/04/18 17:31:33 by amann            ###   ########.fr        #
+#    Updated: 2022/04/19 11:08:07 by amann            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #variables
 NAME = ft_ls
-FLAGS = -Wall -Werror -Wextra -ansi -pedantic -std=c99 -O3 -g
+FLAGS = -Wall -Werror -Wextra -ansi -pedantic -std=c99 -O3
 SRCS = ft_ls.c check_flags.c display_control.c sort_array.c print_basic.c			\
 	   directory_control.c validate_array.c check_file_type.c print_list.c			\
 	   permissions_control.c initialise_fields.c list_constructor.c check_malloc.c	\
@@ -20,14 +20,14 @@ SRCS = ft_ls.c check_flags.c display_control.c sort_array.c print_basic.c			\
 	   free_info_struct.c trim_array.c sorting_flag_checks.c initialise_file_info.c	\
 	   column_data.c print_other.c xattr_acl.c
 HEADER = -I includes/ft_ls.h
-OBJ = $(SRCS:.c=.o)
+OBJ = $(SRCS:%.c=%.o)
 LIB_DIR = libft/
 LEAK_TEST = -fsanitize=address -g 
 
 #rules
 all: $(NAME)
 
-$(NAME): libft_make $(SRCS) $(OBJ) 
+$(NAME): libft_make $(OBJ)# $(SRCS) 
 	@gcc -o $(NAME) $(OBJ) $(HEADER) -L $(LIB_DIR) -lft
 
 %.o: %.c
