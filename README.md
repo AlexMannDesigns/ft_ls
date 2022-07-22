@@ -27,4 +27,5 @@ The following flags have also been handled:
 
 Anything else passed as argument, or after the flags, will be interpretted as the directory or file that you want ls to display, just like the original program:
 
-<img width="965" alt="Screen Shot 2022-07-22 at 12 04 29 PM" src="https://user-images.githubusercontent.com/69106035/180404842-6251f5d7-9af3-4d3b-a1b0-65a8df1f854b.png">
+<img width="965" alt="Screen Shot 2022-07-22 at 12 05 51 PM" src="https://user-images.githubusercontent.com/69106035/180405041-e373dbe4-df3c-476e-ba2c-3d02a429a4d8.png">
+
