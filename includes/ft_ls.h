@@ -23,9 +23,7 @@
 # include <sys/ioctl.h>
 # include <grp.h>
 # include <pwd.h>
-//# include <uuid/uuid.h>
 # include <time.h>
-//# include <stdio.h>
 # include <sys/types.h>
 
 /* mac headers */
