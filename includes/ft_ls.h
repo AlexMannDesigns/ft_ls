@@ -25,14 +25,14 @@
 # include <pwd.h>
 //# include <uuid/uuid.h>
 # include <time.h>
-# include <stdio.h>
+//# include <stdio.h>
 # include <sys/types.h>
 
 /* mac headers */
 
 #ifdef __APPLE__
 
-/* access contorl lists */
+/* access control lists */
 # include <sys/acl.h>
 
 #endif

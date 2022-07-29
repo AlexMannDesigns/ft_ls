@@ -4,7 +4,7 @@ One of the best ways to understand how a program works is to reverse engineer it
 
 "ls" is used as a command line interface facility, allowing the user to print the contents of the current working directory. For more information 'man ls' on macOS or Linux will provide a detailed overview.
 
-Speaking of Linux, this program was built on a Mac system, and runs best in that environment.
+Speaking of Linux, this program was built on a Mac system, and runs best in that environment. I have done some testing on Ubuntu and Mint and it will compile without warnings and run, but some features will be missing.
 
 To compile the program, run 'make' in the root directory and the makefile will take care of everything. You can then simply run './ft_ls', to execute the program. Observe:
 

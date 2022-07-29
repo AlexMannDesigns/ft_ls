@@ -12,7 +12,15 @@
 
 #variables
 NAME = ft_ls
-FLAGS = -Wall -Werror -Wextra -pedantic -std=c99 -O3 -D_DEFAULT_SOURCE #needed for lstat on linux
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S), Linux)
+	FLAGS = -Wall -Werror -Wextra -pedantic -std=c99 -O3 -D_DEFAULT_SOURCE
+endif
+ifeq ($(U_NAME_S), Darwin)
+	FLAGS = -Wall -Werror -Wextra -pedantic -std=c99 -O3
+endif
+
 SRCS = ft_ls.c check_flags.c display_control.c sort_array.c print_basic.c			\
 	   directory_control.c validate_array.c check_file_type.c print_list.c			\
 	   permissions_control.c initialise_fields.c list_constructor.c check_malloc.c	\
