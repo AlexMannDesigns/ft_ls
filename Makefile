@@ -6,20 +6,20 @@
 #    By: amann <amann@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/16 17:55:31 by amann             #+#    #+#              #
-#    Updated: 2022/04/19 11:08:07 by amann            ###   ########.fr        #
+#    Updated: 2022/07/29 11:22:49 by amann            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #variables
 NAME = ft_ls
-FLAGS = -Wall -Werror -Wextra -ansi -pedantic -std=c99 -O3
+FLAGS = -Wall -Werror -Wextra -pedantic -std=c99 -O3 -D_DEFAULT_SOURCE #needed for lstat on linux
 SRCS = ft_ls.c check_flags.c display_control.c sort_array.c print_basic.c			\
 	   directory_control.c validate_array.c check_file_type.c print_list.c			\
 	   permissions_control.c initialise_fields.c list_constructor.c check_malloc.c	\
 	   sort_node_list.c	file_display_control.c init_fields_loop.c user_and_group.c	\
 	   free_info_struct.c trim_array.c sorting_flag_checks.c initialise_file_info.c	\
 	   column_data.c print_other.c xattr_acl.c
-HEADER = -I includes/ft_ls.h
+HEADER = -I includes/
 OBJ = $(SRCS:%.c=%.o)
 LIB_DIR = libft/
 LEAK_TEST = -fsanitize=address -g 
