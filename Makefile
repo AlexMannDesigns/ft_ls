@@ -54,19 +54,5 @@ fclean: clean
 
 re: fclean all
 
-#testing rules
-test:
-	@gcc $(FLAGS) $(HEADER) -c $(SRCS)
-	@gcc -o $(NAME) $(OBJ) $(HEADER) -L $(LIB_DIR) -lft
-
-leak_test:
-	gcc -o $(NAME) $(HEADER) $(SRCS) $(LIB_DIR)srcs/*.c $(LIB_DIR)ft_printf/*.c $(LEAK_TEST) 
-
-tclean:
-	@/bin/rm -rf $(NAME).dSYM
-	@/bin/rm -f $(NAME) $(OBJ)
-
-tre: tclean test
-
-.PHONY: all clean re fclean test tclean tre leak_test libft_make
+.PHONY: all clean re fclean 
 
