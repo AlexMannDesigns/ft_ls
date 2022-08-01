@@ -6,7 +6,7 @@
 /*   By: amann <amann@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 12:41:30 by amann             #+#    #+#             */
-/*   Updated: 2022/03/15 12:21:05 by amann            ###   ########.fr       */
+/*   Updated: 2022/07/29 11:14:43 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ char		*ft_itoa_base_unsigned(const unsigned long long value, int base);
 char		*itoa_reverse(char *str);
 void		ft_putendl(char const *s);
 void		ft_putchar_fd(char c, int fd);
-void		ft_putstr_fd(char const *s, int fd);
+ssize_t		ft_putstr_fd(char const *s, int fd);
 void		ft_putendl_fd(char const *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
-void		ft_putstr(char const *str);
+ssize_t		ft_putstr(char const *str);
 void		ft_putchar(char c);
 void		ft_putnbr(int n);
 

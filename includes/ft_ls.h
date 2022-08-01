@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: amann <amann@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/04/15 15:13:30 by amann            ###   ########.fr       */
+/*   Updated: 2022/07/29 13:14:13 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,26 @@
 # include <sys/ioctl.h>
 # include <grp.h>
 # include <pwd.h>
-# include <uuid/uuid.h>
 # include <time.h>
-# include <stdio.h>
 # include <sys/types.h>
+
+/* mac headers */
+
+#ifdef __APPLE__
+
+/* access control lists */
 # include <sys/acl.h>
+
+#endif
+
+/* linux headers */
+
+#ifdef __linux__
+
+/* major / minor */
+# include <sys/sysmacros.h>
+
+#endif
 
 /***** MACROS *****/
 

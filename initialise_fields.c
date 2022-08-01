@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialise_fields.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amann <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: amann <amann@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 12:27:08 by amann             #+#    #+#             */
-/*   Updated: 2022/04/05 18:48:58 by amann            ###   ########.fr       */
+/*   Updated: 2022/07/29 13:21:49 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,15 @@ void	init_fields(t_fields *f_width, t_list *list, size_t len, t_ls *flags)
 {
 	size_t		i;
 	size_t		*w_arr;
-	t_list		*head;
 
-	i = 0;
 	w_arr = (size_t *) ft_memalloc(sizeof(size_t) * len);
 	f_width->links_arr = (char **) ft_memalloc(sizeof(char *) * len);
 	f_width->user_arr = (char **) ft_memalloc(sizeof(char *) * len);
 	f_width->group_arr = (char **) ft_memalloc(sizeof(char *) * len);
 	f_width->size_arr = (char **) ft_memalloc(sizeof(char *) * len);
 	f_width->blocks = 0;
-	head = list;
+	//malloc protection needed here
+	i = 0;
 	while (i < 4)
 	{
 		init_fields_loop(list, f_width, flags, w_arr);
