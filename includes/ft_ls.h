@@ -6,7 +6,7 @@
 /*   By: amann <amann@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:22:07 by amann             #+#    #+#             */
-/*   Updated: 2022/07/29 13:14:13 by amann            ###   ########.fr       */
+/*   Updated: 2022/08/01 12:00:33 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@
 
 /* mac headers */
 
-#ifdef __APPLE__
+# ifdef __APPLE__
 
 /* access control lists */
-# include <sys/acl.h>
+#  include <sys/acl.h>
 
-#endif
+# endif
 
 /* linux headers */
 
-#ifdef __linux__
+# ifdef __linux__
 
 /* major / minor */
-# include <sys/sysmacros.h>
+#  include <sys/sysmacros.h>
 
-#endif
+# endif
 
 /***** MACROS *****/
 
