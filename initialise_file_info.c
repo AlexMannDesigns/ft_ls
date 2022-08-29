@@ -6,7 +6,7 @@
 /*   By: amann <amann@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:11:07 by amann             #+#    #+#             */
-/*   Updated: 2022/07/29 12:59:56 by amann            ###   ########.fr       */
+/*   Updated: 2022/08/08 14:48:41 by amann            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	populate_link_info(t_file_info **info, char *file_path)
 	if ((*info)->type == LNK)
 	{
 		ft_bzero((void *) buff, LS_BUF_SIZE + 1);
+		ft_putendl(file_path);
 		len = readlink(file_path, buff, LS_BUF_SIZE);
 		if (len == -1)
 		{
